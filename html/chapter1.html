@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第1章：前深度学习时代与早期探索 (Pre-2016)</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">自动驾驶算法演进史 (2016-2024)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第1章：前深度学习时代与早期探索 (Pre-2016)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第2章：深度学习革命开端 (2016-2018)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第3章：感知架构大爆发 (2019-2020)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第4章：BEV与Transformer变革 (2021-2022)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第5章：端到端浪潮 (2023-2024)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第6章：传统感知到深度学习感知</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第7章：BEV感知革命与占据网络</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第8章：规划算法 - 从规则到学习</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第9章：控制算法与执行器协同</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第10章：端到端架构设计与演进</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第11章：端到端工程实践与挑战</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第12章：仿真技术 - 从规则驱动到神经仿真</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter13.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第13章：高精地图 vs 无图方案</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter14.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第14章：纯视觉感知 - Tesla引领的第一性原理</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter15.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第15章：激光雷达方案 - 精度与成本的平衡</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter16.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第16章：多传感器融合 - 冗余设计的必要性</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter17.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第17章：4D毫米波雷达 - 新一代感知利器</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter18.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第18章：L2渐进 vs L4跨越 - 自动驾驶的两条道路</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter19.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第19章：自动驾驶事故分析与安全挑战</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter20.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第20章：特斯拉FSD技术解密</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter21.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第21章：Waymo - L4自动驾驶的技术标杆</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="1-pre-2016">第1章：前深度学习时代与早期探索 (Pre-2016)</h1>
+<blockquote>
+<p>在深度学习彻底改变自动驾驶之前，这个领域已经积累了数十年的技术沉淀。从DARPA挑战赛的荒漠试验场，到Google秘密车库里的改装普锐斯，再到德国高速公路上的Mercedes S-Class，每一步都在为即将到来的AI革命奠定基础。</p>
+</blockquote>
+<h2 id="11-darpa-2004-2007">1.1 DARPA挑战赛的遗产 (2004-2007)</h2>
+<h3 id="111-grand-challenge-">1.1.1 Grand Challenge - 荒漠中的第一次尝试</h3>
+<p>2004年3月13日，莫哈韦沙漠，15支队伍的自动驾驶车辆在起跑线上整装待发。这是DARPA Grand Challenge的第一届比赛，142英里的沙漠赛道，没有一辆车完成。表现最好的卡内基梅隆大学的Sandstorm只跑了7.4英里就撞上了围栏。</p>
+<pre class="codehilite"><code>2004 DARPA Grand Challenge 结果
+┌────────────────────────────────────────────────┐
+│ 排名 │ 团队          │ 车辆        │ 里程(英里) │
+├────────────────────────────────────────────────┤
+│ 1    │ CMU          │ Sandstorm   │ 7.40      │
+│ 2    │ SciAutonics  │ SCIAUTONICS │ 6.70      │
+│ 3    │ ENSCO        │ DAVID       │ 6.00      │
+│ 4    │ Palos Verdes │ Palos Verde │ 5.20      │
+│ 5    │ CMU          │ H1ghlander  │ 5.00      │
+└────────────────────────────────────────────────┘
+</code></pre>
+
+<p>尽管结果惨淡，但这次比赛点燃了整个行业的热情。各团队迅速总结经验：</p>
+<ul>
+<li><strong>感知不足</strong>：2D激光雷达无法准确识别地形</li>
+<li><strong>定位漂移</strong>：纯GPS/INS在峡谷地带信号丢失</li>
+<li><strong>规划保守</strong>：基于规则的路径规划过于僵化</li>
+</ul>
+<h3 id="112-2005">1.1.2 技术栈的快速迭代 - 2005年的突破</h3>
+<p>仅仅18个月后，2005年10月，第二届Grand Challenge见证了历史性突破。Stanford的Stanley率先冲过终点，5辆车完成全程。</p>
+<p>关键技术突破：</p>
+<ol>
+<li><strong>3D激光雷达</strong>：Velodyne HDL-64E成为标配</li>
+<li><strong>概率机器人学</strong>：Sebastian Thrun的概率SLAM</li>
+<li><strong>机器学习初探</strong>：用AdaBoost训练地形分类器</li>
+</ol>
+<pre class="codehilite"><code>Stanley技术架构 (Stanford, 2005)
+┌─────────────────────────────────────────┐
+│            感知层 (Perception)           │
+│  • 5x SICK激光雷达 (地面扫描)            │
+│  • 1x Velodyne激光雷达 (360°环境)       │
+│  • 单目相机 (道路检测)                   │
+│  • 毫米波雷达 (障碍物)                   │
+├─────────────────────────────────────────┤
+│         定位与建图 (Localization)         │
+│  • GPS/INS组合导航                       │
+│  • 轮速计里程计                          │
+│  • 概率地图匹配                          │
+├─────────────────────────────────────────┤
+│         规划决策 (Planning)              │
+│  • A*全局路径规划                        │
+│  • 动态窗口局部规划                      │
+│  • 基于规则的行为决策                    │
+└─────────────────────────────────────────┘
+</code></pre>
+
+<h3 id="113-urban-challenge-">1.1.3 Urban Challenge - 从荒漠到城市</h3>
+<p>2007年的Urban Challenge将难度提升到新高度：60英里的城市环境，需要遵守交规、处理十字路口、完成超车和泊车。</p>
+<p>获胜的CMU Boss系统展示了当时的技术天花板：</p>
+<pre class="codehilite"><code>Boss系统规格 (CMU, 2007)
+硬件配置：
+
+- 11个激光雷达 (包括1个Velodyne HDL-64E)
+- 5个毫米波雷达
+- 2个高精度GPS/IMU
+- 计算平台：10台Core2 Quad服务器
+- 总功耗：3000W
+- 传感器成本：&gt;$500,000
+
+软件架构：
+┌──────────────────────────────────┐
+│     Mission Planning             │
+│   (任务规划：路网级决策)          │
+└──────────────────────────────────┘
+           ↓
+┌──────────────────────────────────┐
+│     Behavioral Executive         │
+│   (行为执行：车道选择/换道决策)    │
+└──────────────────────────────────┘
+           ↓
+┌──────────────────────────────────┐
+│     Motion Planning              │
+│   (运动规划：轨迹生成)            │
+└──────────────────────────────────┘
+</code></pre>
+
+<h3 id="114-darpa">1.1.4 DARPA挑战赛的技术遗产</h3>
+<p>DARPA挑战赛虽然结束了，但它培养的人才成为了自动驾驶行业的中坚力量：</p>
+<p>| 参赛者 | DARPA时期角色 | 后续去向 |</p>
+<table>
+<thead>
+<tr>
+<th>参赛者</th>
+<th>DARPA时期角色</th>
+<th>后续去向</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sebastian Thrun</td>
+<td>Stanford队长</td>
+<td>Google X创始人，Udacity创始人</td>
+</tr>
+<tr>
+<td>Chris Urmson</td>
+<td>CMU技术负责人</td>
+<td>Google自动驾驶负责人，Aurora CEO</td>
+</tr>
+<tr>
+<td>Bryan Salesky</td>
+<td>CMU软件负责人</td>
+<td>Argo AI CEO</td>
+</tr>
+<tr>
+<td>Dave Ferguson</td>
+<td>CMU规划算法</td>
+<td>Google自动驾驶，Nuro创始人</td>
+</tr>
+<tr>
+<td>Anthony Levandowski</td>
+<td>510 Systems</td>
+<td>Google自动驾驶，Uber ATG</td>
+</tr>
+<tr>
+<td>Mike Montemerlo</td>
+<td>Stanford SLAM专家</td>
+<td>Google自动驾驶核心成员</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-google-2009-2015">1.2 Google自动驾驶项目启动 (2009-2015)</h2>
+<h3 id="121-project-chauffeur">1.2.1 Project Chauffeur的诞生</h3>
+<p>2009年，Google X实验室秘密启动Project Chauffeur。Sebastian Thrun说服Larry Page投入这个"登月计划"。初始团队几乎全部来自DARPA挑战赛的获胜队伍。</p>
+<p>早期里程碑：</p>
+<ul>
+<li><strong>2009年</strong>：7辆改装丰田普锐斯开始在山景城测试</li>
+<li><strong>2010年</strong>：累计行驶14万英里未发生事故</li>
+<li><strong>2012年</strong>：获得内华达州首张自动驾驶测试牌照</li>
+<li><strong>2014年</strong>：发布Firefly原型车，没有方向盘和刹车</li>
+</ul>
+<h3 id="122">1.2.2 第一代技术架构</h3>
+<p>Google早期系统继承了Urban Challenge的架构，但在数据和计算上大幅升级：</p>
+<pre class="codehilite"><code>Google自动驾驶系统架构 (2009-2012)
+┌─────────────────────────────────────────────┐
+│               传感器配置                      │
+├─────────────────────────────────────────────┤
+│ • Velodyne HDL-64E (车顶)                   │
+│   - 64线激光雷达，10Hz，120万点/秒           │
+│ • SICK LMS291 x4 (保险杠)                   │
+│   - 单线激光雷达，75Hz，盲区覆盖             │
+│ • Continental ARS 300 x3 (前后)             │
+│   - 77GHz毫米波雷达，200m探测距离            │
+│ • Point Grey相机 x2                         │
+│   - 前向车道线/交通灯检测                    │
+│ • Applanix POS LV 420                      │
+│   - GPS/IMU组合，2cm定位精度                 │
+└─────────────────────────────────────────────┘
+                      ↓
+┌─────────────────────────────────────────────┐
+│           核心算法模块                        │
+├─────────────────────────────────────────────┤
+│ 感知 (Perception)                           │
+│ • 点云分割：Graph-based segmentation         │
+│ • 物体跟踪：Multi-Hypothesis Tracking        │
+│ • 分类识别：人工特征+SVM                      │
+├─────────────────────────────────────────────┤
+│ 定位 (Localization)                         │
+│ • 高精地图：厘米级道路几何+语义               │
+│ • 点云匹配：ICP+粒子滤波                     │
+│ • 多传感器融合：EKF/UKF                      │
+├─────────────────────────────────────────────┤
+│ 预测 (Prediction)                           │
+│ • 轨迹预测：高斯过程回归                      │
+│ • 意图识别：隐马尔可夫模型                    │
+├─────────────────────────────────────────────┤
+│ 规划 (Planning)                             │
+│ • 路径规划：A* + RRT*                       │
+│ • 速度规划：S-T图搜索                        │
+│ • 决策规则：有限状态机                        │
+└─────────────────────────────────────────────┘
+</code></pre>
+
+<h3 id="123-google">1.2.3 高精地图 - Google的秘密武器</h3>
+<p>与DARPA时代不同，Google意识到高精地图是破解感知难题的关键：</p>
+<pre class="codehilite"><code>高精地图数据结构
+Layer 1: 基础地图 (Base Map)
+├── 道路几何：车道中心线、边界
+├── 拓扑连接：车道连接关系
+└── 静态标识：信号灯、标志牌位置
+
+Layer 2: 语义地图 (Semantic Map)  
+├── 车道属性：限速、转向限制
+├── 交通规则：让行关系、停车线
+└── 特殊区域：人行横道、施工区
+
+Layer 3: 先验地图 (Prior Map)
+├── 激光点云特征：用于定位匹配
+├── 视觉特征：道路纹理、标志牌
+└── 统计模型：车流模式、事故多发点
+</code></pre>
+
+<h3 id="124-firefly-">1.2.4 Firefly - 激进的无人驾驶原型</h3>
+<p>2014年，Google发布了完全自主设计的Firefly原型车。这个呆萌的小车代表了Google的技术自信：</p>
+<ul>
+<li><strong>激进设计</strong>：无方向盘、无踏板、限速25mph</li>
+<li><strong>传感器冗余</strong>：激光雷达+相机+毫米波+超声波</li>
+<li><strong>安全考虑</strong>：泡沫前保险杠、软性挡风玻璃</li>
+<li><strong>用户体验</strong>：只有"开始"和"停止"两个按钮</li>
+</ul>
+<p>然而，Firefly最终被放弃，Google转向与传统车企合作。这个决定预示了L4级自动驾驶的漫长道路。</p>
+<h2 id="13-cvhogsift">1.3 传统CV方法：HOG/SIFT/光流</h2>
+<p>在深度学习统治之前，计算机视觉依赖精心设计的特征工程。这些方法虽然"古老"，但其思想至今仍有价值。</p>
+<h3 id="131-hogsvm-">1.3.1 HOG+SVM - 行人检测的经典组合</h3>
+<p>2005年，Dalal和Triggs提出的HOG(Histogram of Oriented Gradients)成为行人检测的标准方法：</p>
+<pre class="codehilite"><code>HOG特征提取流程
+输入图像(64x128)
+    ↓
+梯度计算 (Gradient)
+    ├── Gx = I(x+1,y) - I(x-1,y)
+    └── Gy = I(x,y+1) - I(x,y-1)
+    ↓
+方向直方图 (8x8 cells, 9 bins)
+    ↓
+块归一化 (2x2 cells/block, 50% overlap)
+    ↓
+特征向量 (3780维)
+    ↓
+SVM分类器
+    ↓
+检测结果
+</code></pre>
+
+<p>MobileEye的早期产品大量使用HOG变种：</p>
+<ul>
+<li><strong>检测率</strong>：~90% @ 10^-4 FPPW</li>
+<li><strong>速度</strong>：30fps on EyeQ2 (2008年)</li>
+<li><strong>局限</strong>：对遮挡、姿态变化敏感</li>
+</ul>
+<h3 id="132-siftsurf-">1.3.2 SIFT/SURF - 特征点匹配</h3>
+<p>SIFT(Scale-Invariant Feature Transform)在视觉SLAM中广泛应用：</p>
+<pre class="codehilite"><code>SIFT在自动驾驶中的应用
+
+1. 视觉里程计 (Visual Odometry)
+   - 连续帧特征匹配
+   - 相机位姿估计
+
+2. 闭环检测 (Loop Closure)
+   - 场景识别
+   - 地图重定位
+
+3. 交通标志识别
+   - 模板匹配
+   - 仿射不变性
+
+性能指标 (circa 2010)：
+
+- 特征提取：~200ms/frame (VGA)
+- 匹配精度：&gt;95% (良好光照)
+- 鲁棒性：旋转360°，尺度2x，视角30°
+</code></pre>
+
+<h3 id="133-">1.3.3 光流法 - 运动估计</h3>
+<p>Lucas-Kanade光流是早期ADAS的核心算法：</p>
+<pre class="codehilite"><code>光流在ADAS中的应用场景
+
+1. 前车检测与跟踪
+   光流场 → 运动分割 → 车辆检测
+
+2. 车道偏离预警 (LDW)
+   消失点估计 → 自车运动 → 偏离检测
+
+3. 碰撞时间估计 (TTC)
+   光流发散 → 膨胀率 → TTC = Z/Vz
+
+算法性能 (Bosch ADAS, 2012)：
+
+- 金字塔层数：3-4层
+- 窗口大小：21x21像素  
+- 处理速度：25fps @ QVGA
+- 精度：~0.5像素 (亚像素插值)
+</code></pre>
+
+<h3 id="134-">1.3.4 立体视觉 - 深度估计</h3>
+<p>Subaru的EyeSight是立体视觉的成功案例：</p>
+<pre class="codehilite"><code>EyeSight立体视觉系统 (2008-2015)
+
+硬件配置：
+┌──────────────────────────────┐
+│  左相机        右相机         │
+│    ←── 350mm基线 ──→         │
+│  VGA CMOS    VGA CMOS        │
+└──────────────────────────────┘
+
+处理流程：
+
+1. 立体校正 (Stereo Rectification)
+2. 特征匹配 (Semi-Global Matching)
+3. 视差计算 (Disparity)
+   depth = f × baseline / disparity
+
+4. 3D重建 (250万点/秒)
+
+系统性能：
+
+- 探测距离：1-110m
+- 测距精度：±5% @ 40m
+- 视场角：37° × 27°
+- 处理延迟：&lt;100ms
+</code></pre>
+
+<h2 id="14-adas">1.4 早期ADAS系统架构</h2>
+<h3 id="141-mobileeye-">1.4.1 MobileEye的崛起 - 从后装到前装</h3>
+<p>1999年成立的MobileEye，用一颗单目相机改变了ADAS行业格局。</p>
+<pre class="codehilite"><code>MobileEye EyeQ系列演进
+┌────────────────────────────────────────────────────┐
+│ 代次   │ 年份  │ 算力    │ 功耗 │ 主要客户        │
+├────────────────────────────────────────────────────┤
+│ EyeQ1  │ 2004 │ 未公开  │ 2.5W │ 后装市场        │
+│ EyeQ2  │ 2008 │ 2.5GIPS │ 2.5W │ BMW, GM, Volvo  │
+│ EyeQ3  │ 2014 │ 256GIPS │ 3W   │ Tesla AP1, Audi │
+│ EyeQ4  │ 2018 │ 2.5TOPS │ 3W   │ 38家OEM        │
+└────────────────────────────────────────────────────┘
+
+EyeQ3技术规格 (2014)：
+
+- 双核MIPS + 4个VMP视觉处理器
+- 处理5个摄像头输入
+- 功能：AEB, ACC, LDW, TSR
+- 成本：~$50 (量产价)
+</code></pre>
+
+<p>MobileEye的成功秘诀：</p>
+<ol>
+<li><strong>算法硬件协同设计</strong>：专用VMP加速HOG/SIFT运算</li>
+<li><strong>极致功耗优化</strong>：被动散热即可工作</li>
+<li><strong>渐进式产品策略</strong>：从单一功能到L2+</li>
+</ol>
+<h3 id="142-tier1adas">1.4.2 传统Tier1的ADAS方案</h3>
+<p>Bosch、Continental、Denso等传统供应商采用分布式架构：</p>
+<pre class="codehilite"><code>典型Tier1 ADAS系统架构 (2010-2015)
+
+传感器层：
+┌─────────────────────────────────────────┐
+│ 77GHz雷达  │ 前视相机 │ 角雷达×4 │ 超声波×12 │
+└─────────────────────────────────────────┘
+      ↓             ↓           ↓            ↓
+
+ECU层 (分布式处理)：
+┌──────────┐  ┌──────────┐  ┌──────────┐
+│ ACC ECU  │  │ LKA ECU  │  │ AEB ECU  │
+│ (Freescale│  │ (TI      │  │ (Infineon│
+│  MPC5xxx)│  │  TDA2x)  │  │  Aurix)  │
+└──────────┘  └──────────┘  └──────────┘
+      ↓             ↓             ↓
+
+车辆总线：
+┌─────────────────────────────────────────┐
+│            CAN/FlexRay总线               │
+└─────────────────────────────────────────┘
+      ↓
+执行层：
+┌──────────┐  ┌──────────┐  ┌──────────┐
+│   ESP    │  │   EPS    │  │   TCU    │
+│ (制动)   │  │ (转向)   │  │ (动力)   │
+└──────────┘  └──────────┘  └──────────┘
+</code></pre>
+
+<h3 id="143-adas">1.4.3 ADAS功能分解与实现</h3>
+<p>主流ADAS功能的技术实现（2015年水平）：</p>
+<p>| 功能 | 传感器需求 | 核心算法 | 计算需求 |</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>传感器需求</th>
+<th>核心算法</th>
+<th>计算需求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AEB (自动紧急制动)</strong></td>
+<td>77GHz雷达+相机</td>
+<td>TTC计算+目标分类</td>
+<td>~100 MIPS</td>
+</tr>
+<tr>
+<td><strong>ACC (自适应巡航)</strong></td>
+<td>77GHz雷达</td>
+<td>目标跟踪+PID控制</td>
+<td>~50 MIPS</td>
+</tr>
+<tr>
+<td><strong>LKA (车道保持)</strong></td>
+<td>前视相机</td>
+<td>车道线检测+横向控制</td>
+<td>~200 MIPS</td>
+</tr>
+<tr>
+<td><strong>BSD (盲点检测)</strong></td>
+<td>24GHz角雷达×2</td>
+<td>目标检测+区域判断</td>
+<td>~20 MIPS</td>
+</tr>
+<tr>
+<td><strong>APA (自动泊车)</strong></td>
+<td>超声波×12+环视相机</td>
+<td>空间检测+路径规划</td>
+<td>~500 MIPS</td>
+</tr>
+</tbody>
+</table>
+<pre class="codehilite"><code>AEB系统决策逻辑示例
+
+输入信号：
+
+- 目标距离 d (雷达)
+- 相对速度 vr (雷达多普勒)
+- 目标类型 type (相机分类)
+- 驾驶员状态 (转向/制动)
+
+TTC计算：
+if vr &lt; 0:  # 接近目标
+    ttc = -d / vr
+else:
+    ttc = ∞
+
+制动策略：
+if ttc &lt; 0.6s:
+    全力制动 (&gt;1g)
+elif ttc &lt; 1.0s:
+    部分制动 (0.6g) + 警告
+elif ttc &lt; 2.0s:
+    预填充制动 + 警告
+else:
+    监控状态
+</code></pre>
+
+<h3 id="144">1.4.4 成本与性能的平衡</h3>
+<p>早期ADAS面临的核心挑战是成本：</p>
+<pre class="codehilite"><code>2015年典型L2配置成本分析
+
+传感器成本：
+
+- 77GHz前雷达:        $150
+- 24GHz角雷达×4:      $200  
+- 前视相机(VGA):      $50
+- 超声波×12:          $60
+传感器小计:           $460
+
+计算平台：
+
+- MobileEye EyeQ3:     $50
+- ACC/AEB ECU:         $30
+- 其他ECU:             $50
+计算小计:             $130
+
+软件许可：             $100
+集成测试：             $200
+─────────────────────────
+总成本:               ~$900
+
+对比：
+
+- 整车成本占比: 2-3%
+- 消费者付费意愿: $1500-2000
+- OEM毛利要求: &gt;40%
+</code></pre>
+
+<h2 id="15-2014-mercedes-s-class-">1.5 2014 Mercedes S-Class - 半自动驾驶的里程碑</h2>
+<h3 id="151-distronic-plus-with-steering-assist">1.5.1 Distronic Plus with Steering Assist</h3>
+<p>2013年发布的W222 S-Class是第一款真正意义上的L2级量产车：</p>
+<pre class="codehilite"><code>S-Class自动驾驶功能矩阵
+
+基础功能 (2014)：
+┌────────────────────────────────────────┐
+│ Distronic Plus (增强版ACC)             │
+│ • 0-200km/h全速域                      │
+│ • Stop&amp;Go功能                          │
+│ • 基于导航的速度调节                    │
+├────────────────────────────────────────┤
+│ Steering Assist (转向辅助)             │
+│ • 0-60km/h车道保持                     │
+│ • 60-200km/h车道居中                   │
+│ • 弯道速度自适应                        │
+├────────────────────────────────────────┤
+│ Active Lane Change (主动变道)          │
+│ • 驾驶员确认后执行                      │
+│ • 雷达监控盲区                          │
+│ • 自动回正                              │
+└────────────────────────────────────────┘
+
+高级功能 (2014-2016更新)：
+
+- BAS Plus (交叉路口辅助)
+- PRE-SAFE Plus (后碰撞保护)
+- Night View Assist Plus (夜视行人检测)
+- Traffic Sign Assist (交通标志识别)
+</code></pre>
+
+<h3 id="152-">1.5.2 传感器配置 - 豪华的冗余</h3>
+<p>S-Class采用了当时最豪华的传感器配置：</p>
+<pre class="codehilite"><code>Mercedes S-Class传感器布局 (2014)
+
+        前视立体相机
+            ↓
+    ┌───────────────┐
+    │               │
+远程雷达          远程雷达
+    │   ┌─────┐    │
+    │   │     │    │
+近程雷达  [S]  近程雷达
+    │   │     │    │
+    │   └─────┘    │
+近程雷达          近程雷达
+    │               │
+    └───────────────┘
+          ↓
+      后置雷达×2
+
+详细规格：
+
+1. 立体相机 (车内后视镜)
+   - 6.5cm基线
+   - 45°FOV
+   - 50m有效距离
+
+2. 长距雷达 (前保险杠)
+   - 77GHz，200m探测距离
+   - ±9°视角，0.1°分辨率
+
+3. 短距雷达×6
+   - 24GHz，80m探测距离
+   - ±40°视角
+
+4. 超声波×12
+   - 4.5m探测距离
+   - 用于泊车辅助
+</code></pre>
+
+<h3 id="153-">1.5.3 系统架构 - 分布式到域控制器的过渡</h3>
+<p>S-Class代表了从传统分布式向域控制器架构的过渡：</p>
+<pre class="codehilite"><code>S-Class E/E架构
+
+域控制器层：
+┌─────────────────────────────────────┐
+│      驾驶辅助域控制器                │
+│   (Driver Assistance Domain)        │
+│   • 双核处理器                       │
+│   • 传感器融合                       │
+│   • 轨迹规划                         │
+└─────────────────────────────────────┘
+            ↓
+    FlexRay总线 (10Mbps)
+            ↓
+功能ECU层：
+┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐
+│ ESP  │  │ EPS  │  │ TCU  │  │ BCM  │
+└──────┘  └──────┘  └──────┘  └──────┘
+
+软件架构特点：
+
+1. 模型预测控制 (MPC) 用于轨迹跟踪
+2. 多目标决策优化 (舒适性vs效率)
+3. 驾驶员监控与接管逻辑
+4. 功能降级策略
+</code></pre>
+
+<h3 id="154">1.5.4 市场影响与技术启示</h3>
+<p>S-Class的成功带来了深远影响：</p>
+<p><strong>技术验证</strong>：</p>
+<ul>
+<li>证明了L2级自动驾驶的技术可行性</li>
+<li>建立了"驾驶员负责"的法律框架</li>
+<li>确立了渐进式路线的主流地位</li>
+</ul>
+<p><strong>产业影响</strong>：</p>
+<ul>
+<li>2015-2016年，各豪华品牌快速跟进</li>
+<li>BMW 7系 (2015): Driving Assistant Plus</li>
+<li>Audi A8 (2017): Traffic Jam Pilot (L3)</li>
+<li>Volvo XC90 (2016): Pilot Assist</li>
+</ul>
+<p><strong>经验教训</strong>：</p>
+<ol>
+<li><strong>传感器冗余必要性</strong>：单一传感器无法覆盖所有场景</li>
+<li><strong>人机交互的重要性</strong>：接管提醒、状态显示</li>
+<li><strong>ODD定义明确</strong>：速度范围、道路类型、天气条件</li>
+<li><strong>持续OTA的需求</strong>：功能迭代、bug修复</li>
+</ol>
+<pre class="codehilite"><code>L2功能使用率统计 (J.D. Power, 2016)
+┌────────────────────────────────────┐
+│ ACC使用率:        71%              │
+│ LKA使用率:        52%              │
+│ 自动泊车使用率:    23%              │
+│ 盲点检测满意度:    89%              │
+│ 整体安全感提升:    82%              │
+└────────────────────────────────────┘
+</code></pre>
+
+<hr />
+<h2 id="_1">本章小结</h2>
+<p>前深度学习时代(Pre-2016)奠定了自动驾驶的技术基础：</p>
+<ol>
+<li><strong>DARPA挑战赛</strong>培养了第一代自动驾驶人才，验证了基础技术栈</li>
+<li><strong>Google项目</strong>证明了城市道路自动驾驶的可能性，确立了高精地图的重要性</li>
+<li><strong>传统CV算法</strong>虽然性能有限，但计算效率高，至今仍在嵌入式系统中使用</li>
+<li><strong>早期ADAS</strong>建立了产业化路径，培育了市场需求</li>
+<li><strong>Mercedes S-Class</strong>实现了L2级量产，开启了辅助驾驶的商业化时代</li>
+</ol>
+<p>这个时期的核心特征：</p>
+<ul>
+<li><strong>技术路线</strong>：规则主导，特征工程</li>
+<li><strong>传感器方案</strong>：激光雷达for L4，雷达+相机for L2</li>
+<li><strong>商业模式</strong>：L4追求一步到位，L2渐进式演进</li>
+<li><strong>关键挑战</strong>：感知能力不足，极度依赖高精地图</li>
+</ul>
+<p>2016年即将到来的深度学习革命，将彻底改变这一切。</p>
+            </article>
+            
+            <nav class="page-nav"><a href="index.html" class="nav-link prev">← 自动驾驶算法演进史 (2016-2024)</a><a href="chapter2.html" class="nav-link next">第2章：深度学习革命开端 (2016-2018) →</a></nav>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>自动驾驶算法演进史 (2016-2024)</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item active" >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">自动驾驶算法演进史 (2016-2024)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第1章：前深度学习时代与早期探索 (Pre-2016)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第2章：深度学习革命开端 (2016-2018)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第3章：感知架构大爆发 (2019-2020)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第4章：BEV与Transformer变革 (2021-2022)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第5章：端到端浪潮 (2023-2024)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第6章：传统感知到深度学习感知</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第7章：BEV感知革命与占据网络</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第8章：规划算法 - 从规则到学习</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第9章：控制算法与执行器协同</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第10章：端到端架构设计与演进</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第11章：端到端工程实践与挑战</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第12章：仿真技术 - 从规则驱动到神经仿真</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter13.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第13章：高精地图 vs 无图方案</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter14.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第14章：纯视觉感知 - Tesla引领的第一性原理</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter15.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第15章：激光雷达方案 - 精度与成本的平衡</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter16.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第16章：多传感器融合 - 冗余设计的必要性</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter17.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第17章：4D毫米波雷达 - 新一代感知利器</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter18.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第18章：L2渐进 vs L4跨越 - 自动驾驶的两条道路</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter19.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第19章：自动驾驶事故分析与安全挑战</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter20.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第20章：特斯拉FSD技术解密</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter21.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第21章：Waymo - L4自动驾驶的技术标杆</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="2016-2024">自动驾驶算法演进史 (2016-2024)</h1>
+<h2 id="_1">导航</h2>
+<h3 id="_2">第一部分：编年史</h3>
+<ul>
+<li><a href="chapter1.html">第1章：前深度学习时代与早期探索 (Pre-2016)</a></li>
+<li>DARPA挑战赛的遗产</li>
+<li>Google自动驾驶项目启动</li>
+<li>传统CV方法：HOG/SIFT/光流</li>
+<li>早期ADAS系统架构</li>
+<li>
+<p>2014 Mercedes S-Class半自动驾驶</p>
+</li>
+<li>
+<p><a href="chapter2.html">第2章：深度学习革命开端 (2016-2018)</a></p>
+</li>
+<li>2016 NVIDIA DAVE-2论文发表</li>
+<li>2016.5 Tesla Model S事故 (Joshua Brown) - 首起Autopilot致死案</li>
+<li>2016.10 MobileEye与Tesla分手</li>
+<li>2017 Waymo起诉Uber技术窃取案</li>
+<li>2018.3 Uber自动驾驶致死案 (Elaine Herzberg) - 首起L4致死</li>
+<li>2018 Apollo开源计划</li>
+<li>
+<p>CNN在感知中的统治地位</p>
+</li>
+<li>
+<p><a href="chapter3.html">第3章：感知架构大爆发 (2019-2020)</a></p>
+</li>
+<li>2019 Tesla Autonomy Day展示FSD芯片</li>
+<li>多任务学习网络兴起</li>
+<li>伪激光雷达与深度估计</li>
+<li>2020.1 德国批准Tesla Autopilot合法</li>
+<li>2020 COVID推动无人配送发展</li>
+<li>BEV感知初现端倪</li>
+<li>
+<p>中国NOA功能开始落地</p>
+</li>
+<li>
+<p><a href="chapter4.html">第4章：BEV与Transformer变革 (2021-2022)</a></p>
+</li>
+<li>2021 Tesla AI Day展示BEV+Transformer</li>
+<li>BEVDet/BEVFormer等论文爆发</li>
+<li>2021.8 蔚来NOP事故引发辅助驾驶争议</li>
+<li>2022 FSD Beta北美大规模推送</li>
+<li>Occupancy Network占据网络兴起</li>
+<li>2022.11 小鹏P7高速事故</li>
+<li>
+<p>向量化地图与在线建图</p>
+</li>
+<li>
+<p><a href="chapter5.html">第5章：端到端浪潮 (2023-2024)</a></p>
+</li>
+<li>2023.8 Tesla FSD V12纯端到端发布</li>
+<li>中国端到端方案井喷</li>
+<li>2023 Cruise拖行事故导致运营暂停</li>
+<li>世界模型与生成式方法</li>
+<li>2024 价格战与算力竞赛</li>
+<li>2024.2 Waymo凤凰城完全无人运营</li>
+<li>大模型驱动的自动驾驶</li>
+</ul>
+<h3 id="_3">第二部分：专题深度分析</h3>
+<h4 id="_4">感知算法演进</h4>
+<ul>
+<li><a href="chapter6.html">第6章：传统感知到深度学习感知</a></li>
+<li>从2D检测到3D感知</li>
+<li>多任务学习与特征共享</li>
+<li>深度估计与伪激光雷达</li>
+<li><a href="chapter7.html">第7章：BEV感知革命与占据网络</a></li>
+<li>BEV感知范式革命</li>
+<li>占据网络与世界模型</li>
+<li>4D时序感知与预测</li>
+</ul>
+<h4 id="_5">规划控制算法</h4>
+<ul>
+<li><a href="chapter8.html">第8章：规划算法 - 从规则到学习</a></li>
+<li>传统规划方法：A*、RRT、Lattice</li>
+<li>学习型规划：模仿学习vs强化学习</li>
+<li>轨迹预测与交互式规划</li>
+<li><a href="chapter9.html">第9章：控制算法与执行器协同</a></li>
+<li>经典控制理论：PID、MPC、LQR</li>
+<li>学习型控制与自适应</li>
+<li>端到端规控一体化</li>
+</ul>
+<h4 id="_6">端到端架构深度剖析</h4>
+<ul>
+<li><a href="chapter10.html">第10章：端到端架构设计与演进</a></li>
+<li>端到端演进全史</li>
+<li>模块化vs端到端权衡</li>
+<li>架构设计模式与创新</li>
+<li><a href="chapter11.html">第11章：端到端工程实践与挑战</a></li>
+<li>数据闭环与自动标注</li>
+<li>模型训练与部署优化</li>
+<li>中国方案对比分析</li>
+</ul>
+<h3 id="_7">第三部分：关键技术与争议</h3>
+<ul>
+<li><a href="chapter12.html">第12章：仿真技术 - 从规则驱动到神经仿真</a></li>
+<li>传统仿真：CARLA/SUMO/PreScan</li>
+<li>数据驱动仿真：Log Replay与场景重建</li>
+<li>神经渲染与生成式仿真</li>
+<li>Sim2Real Gap问题</li>
+<li><a href="chapter13.html">第13章：高精地图 vs 无图方案</a></li>
+<li><a href="chapter14.html">第14章：纯视觉感知 - Tesla引领的第一性原理</a></li>
+<li><a href="chapter15.html">第15章：激光雷达方案 - 精度与成本的平衡</a></li>
+<li><a href="chapter16.html">第16章：多传感器融合 - 冗余设计的必要性</a></li>
+<li><a href="chapter17.html">第17章：4D毫米波雷达 - 新一代感知利器</a></li>
+<li><a href="chapter18.html">第18章：L2渐进 vs L4跨越</a></li>
+<li><a href="chapter19.html">第19章：自动驾驶事故分析与安全挑战</a></li>
+<li>典型事故案例深度剖析</li>
+<li>技术局限性与边界条件</li>
+<li>安全冗余设计演进</li>
+<li>监管响应与标准制定</li>
+</ul>
+<h3 id="_8">第四部分：产业格局与玩家分析</h3>
+<h4 id="_9">国际巨头</h4>
+<ul>
+<li><a href="chapter20.html">第20章：特斯拉FSD技术解密</a></li>
+<li><a href="chapter21.html">第21章：Waymo - L4自动驾驶的技术标杆</a></li>
+</ul>
+<h4 id="_10">中国核心玩家</h4>
+<ul>
+<li><a href="chapter22.html">第22章：百度Apollo - 从开放平台到商业化落地</a></li>
+<li><a href="chapter23.html">第23章：小鹏汽车 - 从NGP到XNGP的全栈自研之路</a></li>
+<li><a href="chapter24.html">第24章：华为车BU - ADS算法架构深度剖析</a></li>
+<li><a href="chapter25.html">第25章：地平线 - 芯片算法协同设计的典范</a></li>
+<li><a href="chapter26.html">第26章：大疆车载 - 极致成本控制下的算法创新</a></li>
+<li><a href="chapter27.html">第27章：Momenta - 量产与L4双线并进</a></li>
+</ul>
+<h4 id="_11">其他重要玩家</h4>
+<ul>
+<li><a href="chapter28.html">第28章：新势力与传统车企</a></li>
+<li>理想AD Max</li>
+<li>蔚来NAD/NOP+</li>
+<li>毫末DriveGPT</li>
+<li>比亚迪/吉利/长城</li>
+<li><a href="chapter29.html">第29章：L4公司转型之路</a></li>
+<li>元戎启行</li>
+<li>文远知行</li>
+<li>小马智行</li>
+<li>AutoX</li>
+<li><a href="chapter30.html">第30章：ADAS专业供应商</a></li>
+<li>Maxieye(智驾科技)：从后装到前装的本土化之路</li>
+<li>Minieye(佑驾创新)：商用车ADAS普及推动者</li>
+<li>中科慧眼：立体视觉技术路线</li>
+<li>清智科技：毫米波雷达+视觉融合</li>
+<li>福瑞泰克：77GHz毫米波雷达先行者</li>
+</ul>
+<h3 id="_12">第五部分：未来展望</h3>
+<ul>
+<li><a href="chapter31.html">第31章：算法与芯片协同演进</a></li>
+<li><a href="chapter32.html">第32章：大模型与世界模型</a></li>
+<li><a href="chapter33.html">第33章：自动驾驶的终局思考</a></li>
+</ul>
+<h2 id="_13">核心技术演进时间线</h2>
+<pre class="codehilite"><code>2016  ├─ NVIDIA DAVE-2 端到端驾驶开山之作
+      ├─ MobileEye EyeQ4 ADAS统治时代
+      │
+2017  ├─ Tesla AP2.0 启动自研之路
+      ├─ Waymo 公开大规模路测
+      │
+2018  ├─ Tesla AP3.0 自研芯片FSD Computer
+      ├─ Apollo 3.0 开源自动驾驶平台
+      │
+2019  ├─ Tesla FSD Beta早期版本
+      ├─ 感知进入多任务学习时代
+      │
+2020  ├─ BEV感知概念兴起 (DETR3D, BEVDet)
+      ├─ Transformer开始渗透自动驾驶
+      │
+2021  ├─ Tesla BEV + Transformer重构
+      ├─ 国内BEV感知百花齐放
+      │
+2022  ├─ Occupancy Network占据网络爆发
+      ├─ 重感知轻地图成为共识
+      │
+2023  ├─ Tesla FSD V12 纯端到端
+      ├─ 国内端到端方案井喷
+      │
+2024  ├─ 世界模型与生成式自动驾驶
+      └─ 端到端成为行业标配
+</code></pre>
+
+<h2 id="_14">关键技术对比</h2>
+<h3 id="l2-vs-l4">L2 vs L4 技术栈差异</h3>
+<pre class="codehilite"><code>┌─────────────────────────────────────────────────────┐
+│                    L2 (渐进式)                       │
+├─────────────────────────────────────────────────────┤
+│  • 成本约束: &lt;$500 BOM                              │
+│  • 算力约束: &lt;100 TOPS                              │
+│  • 传感器: 纯视觉为主                                │
+│  • 地图依赖: 轻地图/无图                             │
+│  • 场景: 高速+城区NOA                               │
+│  • 代表: Tesla FSD, 小鹏XNGP                        │
+└─────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────┐
+│                    L4 (跨越式)                       │
+├─────────────────────────────────────────────────────┤
+│  • 成本: &gt;$10000                                    │
+│  • 算力: &gt;1000 TOPS                                 │
+│  • 传感器: LiDAR+Camera+Radar                       │
+│  • 地图: 高精地图依赖                                │
+│  • 场景: 限定区域Robotaxi                           │
+│  • 代表: Waymo, Cruise, 百度Apollo                  │
+└─────────────────────────────────────────────────────┘
+</code></pre>
+
+<h3 id="_15">感知架构演进对比</h3>
+<p>| 年代 | 架构范式 | 关键技术 | 代表方案 |</p>
+<table>
+<thead>
+<tr>
+<th>年代</th>
+<th>架构范式</th>
+<th>关键技术</th>
+<th>代表方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016-2018</td>
+<td>2D感知</td>
+<td>CNN, YOLO/SSD</td>
+<td>MobileEye, AP2.0</td>
+</tr>
+<tr>
+<td>2019-2020</td>
+<td>2.5D感知</td>
+<td>伪3D, 深度估计</td>
+<td>AP3.0早期</td>
+</tr>
+<tr>
+<td>2021-2022</td>
+<td>BEV感知</td>
+<td>LSS, BEVFormer</td>
+<td>Tesla FSD Beta, BEVDet</td>
+</tr>
+<tr>
+<td>2023-2024</td>
+<td>4D感知</td>
+<td>时序融合, 世界模型</td>
+<td>FSD V12, 各家端到端</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_16">端到端技术路线对比</h3>
+<pre class="codehilite"><code>模块化方案 (Traditional)
+┌──────┐    ┌──────┐    ┌──────┐    ┌──────┐
+│ 感知 │ -&gt; │ 预测 │ -&gt; │ 规划 │ -&gt; │ 控制 │
+└──────┘    └──────┘    └──────┘    └──────┘
+   ↓           ↓           ↓           ↓
+ 可解释     可调试     规则清晰    安全保证
+
+端到端方案 (End-to-End)
+┌────────────────────────────────────┐
+│         Neural Network              │
+│  Sensor ─────&gt; Actions              │
+└────────────────────────────────────┘
+              ↓
+        数据驱动，黑盒
+</code></pre>
+
+<h2 id="_17">中国自动驾驶算法玩家矩阵</h2>
+<h3 id="_18">主机厂自研</h3>
+<ul>
+<li><strong>特斯拉中国</strong>: FSD本土化适配</li>
+<li><strong>小鹏汽车</strong>: XNGP (从辅助到端到端)</li>
+<li><strong>理想汽车</strong>: AD Max (融合路线)</li>
+<li><strong>蔚来汽车</strong>: NAD (多传感器融合)</li>
+<li><strong>华为</strong>: ADS 2.0/3.0 (不依赖高精地图)</li>
+</ul>
+<h3 id="_19">算法供应商</h3>
+<ul>
+<li><strong>Momenta</strong>: 量产+L4双线</li>
+<li><strong>地平线</strong>: 芯片+算法垂直整合</li>
+<li><strong>大疆车载</strong>: 成本优化见长</li>
+<li><strong>毫末智行</strong>: DriveGPT数据智能</li>
+<li><strong>元戎启行</strong>: L4转L2</li>
+<li><strong>文远知行</strong>: Robotaxi坚守者</li>
+</ul>
+<h3 id="_20">芯片与算法协同</h3>
+<p>| 芯片平台 | 算力(TOPS) | 算法特点 | 主要客户 |</p>
+<table>
+<thead>
+<tr>
+<th>芯片平台</th>
+<th>算力(TOPS)</th>
+<th>算法特点</th>
+<th>主要客户</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>地平线J5</td>
+<td>128</td>
+<td>BEV优化, INT8量化</td>
+<td>理想、长城</td>
+</tr>
+<tr>
+<td>地平线J6</td>
+<td>560</td>
+<td>Transformer加速</td>
+<td>比亚迪、大众</td>
+</tr>
+<tr>
+<td>英伟达Orin</td>
+<td>254</td>
+<td>通用架构</td>
+<td>蔚来、小鹏</td>
+</tr>
+<tr>
+<td>华为MDC610</td>
+<td>200</td>
+<td>自研架构</td>
+<td>问界、极狐</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_21">技术争议焦点</h2>
+<h3 id="1">1. 高精地图之争</h3>
+<ul>
+<li><strong>支持派</strong>: 提供先验，保证安全下限</li>
+<li><strong>反对派</strong>: 成本高，更新慢，限制扩展</li>
+</ul>
+<h3 id="2-vs">2. 纯视觉 vs 融合感知</h3>
+<ul>
+<li><strong>Tesla路线</strong>: 纯视觉，第一性原理</li>
+<li><strong>中国路线</strong>: 务实融合，渐进演进</li>
+</ul>
+<h3 id="3">3. 数据规模效应</h3>
+<ul>
+<li><strong>关键问题</strong>: 自动驾驶是否遵循Scaling Law?</li>
+<li><strong>Tesla观点</strong>: 数据+算力=智能涌现</li>
+<li><strong>业界分歧</strong>: 长尾问题与安全保证</li>
+</ul>
+<h3 id="4">4. 仿真的作用</h3>
+<ul>
+<li><strong>乐观派</strong>: 仿真解决corner case</li>
+<li><strong>保守派</strong>: Sim2Real gap难以逾越</li>
+</ul>
+<h2 id="_22">阅读指南</h2>
+<ol>
+<li><strong>快速了解</strong>: 阅读编年史部分(第1-5章)了解技术演进脉络</li>
+<li><strong>技术深入</strong>: 专题分析部分(第6-11章)深入特定技术领域  </li>
+<li><strong>产业视角</strong>: 第20-30章了解主要玩家技术特点</li>
+<li><strong>趋势判断</strong>: 技术争议部分理解行业分歧与未来方向</li>
+</ol>
+<hr />
+<p><em>本文档持续更新中，最后更新：2024年12月</em></p>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter1.html" class="nav-link next">第1章：前深度学习时代与早期探索 (Pre-2016) →</a></nav>
+        </main>
+    </div>
+</body>
+</html>

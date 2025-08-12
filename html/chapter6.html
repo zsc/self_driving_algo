@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第6章：传统感知到深度学习感知</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">自动驾驶算法演进史 (2016-2024)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第1章：前深度学习时代与早期探索 (Pre-2016)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第2章：深度学习革命开端 (2016-2018)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第3章：感知架构大爆发 (2019-2020)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第4章：BEV与Transformer变革 (2021-2022)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第5章：端到端浪潮 (2023-2024)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第6章：传统感知到深度学习感知</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第7章：BEV感知革命与占据网络</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第8章：规划算法 - 从规则到学习</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第9章：控制算法与执行器协同</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第10章：端到端架构设计与演进</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第11章：端到端工程实践与挑战</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第12章：仿真技术 - 从规则驱动到神经仿真</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter13.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第13章：高精地图 vs 无图方案</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter14.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第14章：纯视觉感知 - Tesla引领的第一性原理</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter15.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第15章：激光雷达方案 - 精度与成本的平衡</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter16.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第16章：多传感器融合 - 冗余设计的必要性</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter17.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第17章：4D毫米波雷达 - 新一代感知利器</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter18.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第18章：L2渐进 vs L4跨越 - 自动驾驶的两条道路</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter19.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第19章：自动驾驶事故分析与安全挑战</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter20.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第20章：特斯拉FSD技术解密</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter21.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第21章：Waymo - L4自动驾驶的技术标杆</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="6">第6章：传统感知到深度学习感知</h1>
+<h2 id="_1">章节概要</h2>
+<p>自动驾驶感知技术在2016-2020年间经历了从传统计算机视觉到深度学习的范式转变。本章深入剖析这一转变过程中的关键技术演进、架构创新和工程实践，重点关注2D到3D感知的跃迁、多任务学习架构的兴起，以及深度估计技术如何弥合纯视觉与激光雷达的性能鸿沟。</p>
+<h2 id="61-2d3d">6.1 从2D检测到3D感知</h2>
+<h3 id="611-cv-pre-2016">6.1.1 传统CV时代的局限性 (Pre-2016)</h3>
+<h4 id="_2">经典方法回顾</h4>
+<p>传统计算机视觉方法在自动驾驶早期扮演了重要角色，但存在根本性局限：</p>
+<pre class="codehilite"><code>传统CV Pipeline (2010-2015)
+┌─────────────┐    ┌──────────────┐    ┌───────────┐
+│  特征提取    │ -&gt; │  特征描述     │ -&gt; │  分类器    │
+│  HOG/SIFT   │    │  BoW/Fisher  │    │  SVM/RF   │
+└─────────────┘    └──────────────┘    └───────────┘
+      ↓                    ↓                  ↓
+  手工设计            维度诅咒           泛化能力差
+</code></pre>
+
+<p><strong>HOG (Histogram of Oriented Gradients) 行人检测</strong></p>
+<ul>
+<li>Dalal &amp; Triggs (2005) 的经典方法</li>
+<li>滑动窗口 + 梯度直方图</li>
+<li>检测速度: ~1 FPS (640×480)</li>
+<li>检测精度: ~80% AP on INRIA dataset</li>
+<li>致命缺陷: 无法处理遮挡、形变、光照变化</li>
+</ul>
+<p><strong>Haar Cascades 车辆检测</strong></p>
+<ul>
+<li>Viola-Jones框架的延伸</li>
+<li>积分图加速计算</li>
+<li>实时性好但精度低</li>
+<li>MobileEye早期EyeQ芯片的主要算法</li>
+</ul>
+<p><strong>立体视觉深度估计</strong></p>
+<ul>
+<li>基于SGBM (Semi-Global Block Matching)</li>
+<li>计算复杂度O(WHD), D为视差搜索范围</li>
+<li>对标定精度极度敏感</li>
+<li>纹理缺失区域失效</li>
+</ul>
+<h4 id="mobileeye-eyeq-2014-2017">MobileEye EyeQ时代 (2014-2017)</h4>
+<p>MobileEye在深度学习来临前的统治地位源于其精心设计的专用架构：</p>
+<p>| EyeQ版本 | 年份 | 算力 | 核心算法 | 客户 |</p>
+<table>
+<thead>
+<tr>
+<th>EyeQ版本</th>
+<th>年份</th>
+<th>算力</th>
+<th>核心算法</th>
+<th>客户</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EyeQ2</td>
+<td>2010</td>
+<td>2.5 GOPS</td>
+<td>Haar+HOG</td>
+<td>BMW, GM</td>
+</tr>
+<tr>
+<td>EyeQ3</td>
+<td>2014</td>
+<td>256 GOPS</td>
+<td>混合CNN</td>
+<td>Tesla AP1</td>
+</tr>
+<tr>
+<td>EyeQ4</td>
+<td>2018</td>
+<td>2.5 TOPS</td>
+<td>深度CNN</td>
+<td>日产ProPilot</td>
+</tr>
+</tbody>
+</table>
+<p>EyeQ3的突破在于引入了早期CNN，但仍保留大量传统CV：</p>
+<ul>
+<li>车道线: 基于Hough变换的多项式拟合</li>
+<li>目标跟踪: Kalman滤波 + Hungarian匹配</li>
+<li>空闲空间: 基于v-disparity的地面估计</li>
+</ul>
+<h3 id="612-2d-2016-2018">6.1.2 深度学习2D检测革命 (2016-2018)</h3>
+<h4 id="yolo">YOLO系列：实时检测的突破</h4>
+<pre class="codehilite"><code>YOLO演进时间线
+2016.6  YOLOv1  45 FPS  63.4% mAP  端到端训练
+   ↓
+2016.12 YOLOv2  67 FPS  76.8% mAP  Anchor boxes
+   ↓  
+2018.4  YOLOv3  65 FPS  82.5% mAP  多尺度预测
+   ↓
+2020.4  YOLOv4  65 FPS  87.2% mAP  CSPNet backbone
+</code></pre>
+
+<p><strong>YOLOv3在自动驾驶中的应用</strong></p>
+<ul>
+<li>Tesla Autopilot 2.0 (2017): 8摄像头YOLOv3变体</li>
+<li>百度Apollo 2.0 (2018): YOLOv3 + 跟踪</li>
+<li>关键改进: </li>
+<li>Darknet-53 backbone适配车载算力</li>
+<li>FPN多尺度检测小目标</li>
+<li>9个anchor覆盖车辆尺度范围</li>
+</ul>
+<h4 id="two-stage">Two-Stage方法的精度优势</h4>
+<p>Faster R-CNN系列在需要高精度的场景仍有优势：</p>
+<pre class="codehilite"><code>Two-Stage Pipeline
+┌────────┐    ┌─────────┐    ┌──────────┐
+│ RPN    │ -&gt; │ RoI Pool│ -&gt; │ R-CNN    │
+│ 候选区  │    │ 特征提取 │    │ 精细分类  │
+└────────┘    └─────────┘    └──────────┘
+    ↓              ↓              ↓
+1000个候选     7×7特征图     类别+bbox
+</code></pre>
+
+<p><strong>Cascade R-CNN在L4系统的应用</strong></p>
+<ul>
+<li>Waymo (2018): Cascade R-CNN处理稀疏激光雷达</li>
+<li>IoU阈值递增: 0.5 -&gt; 0.6 -&gt; 0.7</li>
+<li>小目标检测提升: +3.2% AP on KITTI</li>
+</ul>
+<h3 id="613-2d3d-2018-2020">6.1.3 从2D到3D的关键跨越 (2018-2020)</h3>
+<h4 id="3d">单目3D检测的探索</h4>
+<p><strong>M3D-RPN (2019)</strong></p>
+<pre class="codehilite"><code>深度感知锚点设计
+┌─────────────────────────────┐
+│  2D中心 (u,v)                │
+│     ↓                        │
+│  3D中心 (X,Y,Z)              │
+│     ↓                        │
+│  3D框 (l,w,h,θ)              │
+└─────────────────────────────┘
+关键: 2D-3D一致性约束
+</code></pre>
+
+<p><strong>SMOKE (2020) - 无需2D检测的3D预测</strong></p>
+<ul>
+<li>直接回归3D中心投影点</li>
+<li>关键见解: 3D中心投影≠2D bbox中心</li>
+<li>KITTI moderate: 14.03% AP3D</li>
+<li>推理速度: 30ms on 1080Ti</li>
+</ul>
+<h4 id="_3">伪激光雷达方法</h4>
+<p><strong>Pseudo-LiDAR (2019)</strong></p>
+<p>将深度图转换为点云表示的革命性思路：</p>
+<pre class="codehilite"><code>Pipeline:
+图像对 -&gt; 深度估计 -&gt; 3D点云 -&gt; PointNet检测
+        PSMNet     坐标变换    现成3D检测器
+
+关键创新: 表示形式比深度精度更重要
+性能提升: 单目3D检测 +100% AP3D
+</code></pre>
+
+<p><strong>Pseudo-LiDAR++改进</strong></p>
+<ul>
+<li>立体深度网络与稀疏激光雷达联合训练</li>
+<li>Depth Completion Network填补深度空洞</li>
+<li>性能接近64线激光雷达的30%</li>
+</ul>
+<h3 id="614-3d-2019-2020">6.1.4 多视角3D感知 (2019-2020)</h3>
+<h4 id="lss-bev">LSS: BEV感知的先驱</h4>
+<p><strong>Lift-Splat-Shoot (2020)</strong></p>
+<pre class="codehilite"><code>三步转换:
+
+1. Lift: 图像特征 -&gt; 3D frustum特征
+   每个像素预测深度分布 D(d|x)
+
+2. Splat: 3D特征 -&gt; BEV网格
+   Pillar pooling聚合
+
+3. Shoot: BEV特征 -&gt; 下游任务
+   检测/分割/规划
+</code></pre>
+
+<p>关键技术突破：</p>
+<ul>
+<li>深度分布而非单一深度值</li>
+<li>可微分的视角转换</li>
+<li>端到端训练</li>
+</ul>
+<h4 id="detr3d-query-based-3d">DETR3D: Query-based 3D检测</h4>
+<pre class="codehilite"><code>架构:
+Multi-view Images -&gt; CNN Features -&gt; Transformer
+                                          ↓
+                                    3D Queries
+                                          ↓
+                                    3D Boxes
+
+创新点:
+
+- 3D reference points采样图像特征
+- 无需密集深度估计
+- 全局感受野
+</code></pre>
+
+<h2 id="62">6.2 多任务学习与特征共享</h2>
+<h3 id="621">6.2.1 多任务学习动机</h3>
+<h4 id="_4">计算资源约束</h4>
+<p>车载平台算力限制下的权衡：</p>
+<p>| 平台 | 算力 | 功耗 | 单任务模型数 | 多任务收益 |</p>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>算力</th>
+<th>功耗</th>
+<th>单任务模型数</th>
+<th>多任务收益</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Xavier</td>
+<td>30 TOPS</td>
+<td>30W</td>
+<td>3-4个</td>
+<td>基准</td>
+</tr>
+<tr>
+<td>Orin</td>
+<td>254 TOPS</td>
+<td>60W</td>
+<td>8-10个</td>
+<td>40%算力节省</td>
+</tr>
+<tr>
+<td>J5</td>
+<td>128 TOPS</td>
+<td>35W</td>
+<td>5-6个</td>
+<td>50%算力节省</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_5">任务相关性分析</h4>
+<pre class="codehilite"><code>感知任务相关性矩阵
+        检测  分割  深度  车道线
+检测    1.0   0.7   0.8   0.5
+分割    0.7   1.0   0.6   0.7  
+深度    0.8   0.6   1.0   0.4
+车道线  0.5   0.7   0.4   1.0
+
+高相关性(&gt;0.7)任务适合共享
+</code></pre>
+
+<h3 id="622-2018-2019">6.2.2 早期多任务架构 (2018-2019)</h3>
+<h4 id="multinet-2018">MultiNet (2018)</h4>
+<pre class="codehilite"><code>共享编码器架构
+           Input
+             ↓
+     Shared Encoder
+          /  |  \
+    检测头  分割头  深度头
+       ↓     ↓      ↓
+    Boxes  Mask   Depth
+</code></pre>
+
+<p>特点：</p>
+<ul>
+<li>简单的hard parameter sharing</li>
+<li>任务间无交互</li>
+<li>梯度冲突问题严重</li>
+</ul>
+<h4 id="dlt-net-2019">DLT-Net (2019)</h4>
+<p>引入可学习的任务权重：</p>
+<pre class="codehilite"><code class="language-python"># 动态任务权重
+task_weights = {
+    'detection': 1.0,
+    'drivable': 0.7 * (1 + 0.3*cos(epoch/max_epoch*π)),
+    'lane': 0.5
+}
+</code></pre>
+
+<h3 id="623-2019-2020">6.2.3 注意力机制与任务交互 (2019-2020)</h3>
+<h4 id="pad-net">PAD-Net架构</h4>
+<pre class="codehilite"><code>任务交互模块
+Detection Features ←→ Distillation ←→ Segmentation Features
+         ↓                ↓                    ↓
+    Det Output      Shared Feature       Seg Output
+</code></pre>
+
+<p>关键创新：</p>
+<ul>
+<li>Task-specific attention masks</li>
+<li>Cross-task feature distillation  </li>
+<li>性能提升: +2.3% mAP, +1.8% mIoU</li>
+</ul>
+<h4 id="yolop-2021">YOLOP (2021)</h4>
+<pre class="codehilite"><code>高效的三任务模型
+┌──────────────────────────────┐
+│     Shared Backbone          │
+│      CSPDarknet              │
+└──────────┬───────────────────┘
+           ↓
+    ┌──────┴──────┐
+    ↓             ↓
+ Neck(FPN)    Seg Decoder
+    ↓             ↓
+ Det Head    DA&amp;LL Head
+    ↓          ↓    ↓
+ Boxes    Drivable Lane
+
+推理速度: 40ms@320×180 (Jetson TX2)
+精度: 89.2 mAP, 91.5 mIoU drivable, 70.3 IoU lane
+</code></pre>
+
+<h3 id="624">6.2.4 端到端多任务优化</h3>
+<h4 id="_6">梯度平衡策略</h4>
+<p><strong>GradNorm (2018)</strong></p>
+<pre class="codehilite"><code class="language-python"># 自适应任务权重
+L_total = Σ w_i(t) * L_i
+w_i(t+1) = w_i(t) * exp(α * (G_i/G_avg - 1))
+# G_i: 任务i的梯度范数
+</code></pre>
+
+<p><strong>Uncertainty Weighting</strong></p>
+<pre class="codehilite"><code class="language-python"># 基于不确定性的权重
+L_total = Σ (1/2σ_i²) * L_i + log(σ_i)
+# σ_i: 可学习的任务不确定性
+</code></pre>
+
+<h4 id="_7">多任务学习收益分析</h4>
+<p>| 方法 | 检测mAP | 分割mIoU | 深度RMSE | FPS | 内存 |</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>检测mAP</th>
+<th>分割mIoU</th>
+<th>深度RMSE</th>
+<th>FPS</th>
+<th>内存</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3个独立模型</td>
+<td>78.2</td>
+<td>89.3</td>
+<td>4.82</td>
+<td>12</td>
+<td>3.2GB</td>
+</tr>
+<tr>
+<td>Hard Sharing</td>
+<td>76.5</td>
+<td>87.1</td>
+<td>5.13</td>
+<td>35</td>
+<td>1.1GB</td>
+</tr>
+<tr>
+<td>YOLOP</td>
+<td>77.8</td>
+<td>88.9</td>
+<td>-</td>
+<td>40</td>
+<td>0.9GB</td>
+</tr>
+<tr>
+<td>HybridNets</td>
+<td>77.3</td>
+<td>85.8</td>
+<td>5.54</td>
+<td>32</td>
+<td>1.2GB</td>
+</tr>
+</tbody>
+</table>
+<h2 id="63">6.3 深度估计与伪激光雷达</h2>
+<h3 id="631">6.3.1 单目深度估计演进</h3>
+<h4 id="2016-2018">监督学习方法 (2016-2018)</h4>
+<p><strong>DORN (Deep Ordinal Regression Network)</strong></p>
+<pre class="codehilite"><code>深度离散化策略
+连续深度 -&gt; 序数标签 -&gt; 分类问题
+[0,80m] -&gt; 80个bins -&gt; Softmax
+
+关键创新:
+
+- Spacing-Increasing Discretization
+- 近处密集，远处稀疏
+- KITTI: 4.46m RMSE
+</code></pre>
+
+<p><strong>BTS (2019)</strong></p>
+<pre class="codehilite"><code>架构创新:
+Encoder   Decoder
+ResNet → Upsampling
+   ↓        ↑
+ Skip → Local Planar
+       Guidance
+
+LPG层: 平面假设指导上采样
+性能: KITTI 2.21m RMSE
+</code></pre>
+
+<h4 id="2017-2020">自监督深度估计 (2017-2020)</h4>
+<p><strong>Monodepth2 (2019)</strong></p>
+<pre class="codehilite"><code>自监督损失设计:
+L_total = L_photo + L_smooth + L_consistency
+
+L_photo: 光度一致性
+L_smooth: 深度平滑
+L_consistency: 左右一致性
+
+训练数据: 仅需单目视频
+性能: 接近监督方法80%
+</code></pre>
+
+<p><strong>关键技术突破</strong></p>
+<ol>
+<li><strong>遮挡处理</strong></li>
+</ol>
+<pre class="codehilite"><code class="language-python"># Minimum reprojection loss
+L_photo = min(||I_t - I'_t→t-1||, ||I_t - I'_t→t+1||)
+</code></pre>
+
+<ol start="2">
+<li><strong>移动物体处理</strong></li>
+</ol>
+<pre class="codehilite"><code class="language-python"># Auto-masking
+mask = (L_photo &lt; L_identity)
+</code></pre>
+
+<ol start="3">
+<li><strong>尺度一致性</strong>
+- 通过已知相机高度恢复绝对尺度
+- 或使用车速信息作为尺度监督</li>
+</ol>
+<h3 id="632">6.3.2 立体深度估计</h3>
+<h4 id="_8">传统立体匹配回顾</h4>
+<pre class="codehilite"><code>经典Pipeline:
+左图 ──┐
+      ├→ 特征提取 → 代价计算 → 代价聚合 → 视差优化
+右图 ──┘
+        ↓           ↓          ↓          ↓
+     Census    SAD/SSD      SGM       左右检查
+</code></pre>
+
+<p>问题：</p>
+<ul>
+<li>纹理缺失区域失效</li>
+<li>遮挡边界错误</li>
+<li>计算复杂度高</li>
+</ul>
+<h4 id="_9">深度学习立体匹配</h4>
+<p><strong>PSMNet (2018)</strong></p>
+<pre class="codehilite"><code>金字塔立体匹配网络
+┌─────────────────────────┐
+│   Spatial Pyramid       │
+│   Pooling Module        │
+└───────┬─────────────────┘
+        ↓
+   Cost Volume (D×H×W)
+        ↓
+   3D CNN Aggregation
+        ↓
+   Disparity Regression
+</code></pre>
+
+<p>创新点：</p>
+<ul>
+<li>空间金字塔池化扩大感受野</li>
+<li>3D卷积代价聚合</li>
+<li>亚像素精度: soft argmin</li>
+<li>KITTI 2015: 1.86 pixel error</li>
+</ul>
+<p><strong>GA-Net (2019)</strong></p>
+<pre class="codehilite"><code>引导聚合网络
+Semi-Global → Learnable
+   ↓            ↓
+ GA Layer: 可学习的聚合方向
+
+性能提升但计算量大
+推理: 600ms @ 2080Ti
+</code></pre>
+
+<h3 id="633">6.3.3 伪激光雷达技术深度剖析</h3>
+<h4 id="_10">核心思想与创新</h4>
+<p><strong>表示形式的重要性</strong></p>
+<pre class="codehilite"><code>深度图表示 vs 点云表示
+
+深度图 (前视图)          点云 (鸟瞰图)
+┌────────────┐         ┌────────────┐
+│░░░░████░░░░│         │  ∙∙∙∙∙∙∙   │
+│░░████████░░│   →     │ ∙∙∙∙∙∙∙∙∙  │
+│████████████│         │∙∙∙∙∙∙∙∙∙∙∙ │
+└────────────┘         └────────────┘
+   透视畸变                均匀分布
+
+关键洞察: 
+
+- 3D检测器对点云表示的归纳偏置
+- BEV视角避免透视畸变
+</code></pre>
+
+<h4 id="_11">技术实现细节</h4>
+<p><strong>坐标转换</strong></p>
+<pre class="codehilite"><code class="language-python"># 深度图到点云
+def depth_to_pointcloud(depth, K):
+    h, w = depth.shape
+    u, v = np.meshgrid(range(w), range(h))
+
+    # 反投影到3D
+    z = depth
+    x = (u - K[0,2]) * z / K[0,0]  
+    y = (v - K[1,2]) * z / K[1,1]
+
+    # 相机坐标系到激光雷达坐标系
+    points = np.stack([z, -x, -y], axis=-1)
+    return points.reshape(-1, 3)
+</code></pre>
+
+<p><strong>性能对比</strong></p>
+<p>| 方法 | 输入 | 3D AP (Mod) | 推理时间 |</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>输入</th>
+<th>3D AP (Mod)</th>
+<th>推理时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M3D-RPN</td>
+<td>单目</td>
+<td>14.76</td>
+<td>160ms</td>
+</tr>
+<tr>
+<td>Pseudo-LiDAR</td>
+<td>单目</td>
+<td>28.31</td>
+<td>400ms</td>
+</tr>
+<tr>
+<td>Pseudo-LiDAR</td>
+<td>立体</td>
+<td>42.43</td>
+<td>450ms</td>
+</tr>
+<tr>
+<td>PointPillars</td>
+<td>64线LiDAR</td>
+<td>82.58</td>
+<td>40ms</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_12">改进与优化</h4>
+<p><strong>PL++关键改进</strong></p>
+<ol>
+<li><strong>深度补全网络</strong></li>
+</ol>
+<pre class="codehilite"><code>稀疏LiDAR + 深度图 → 稠密深度
+4线激光雷达指导立体匹配
+性能提升: +15% 3D AP
+</code></pre>
+
+<ol start="2">
+<li><strong>前景分割</strong></li>
+</ol>
+<pre class="codehilite"><code>Instance mask指导深度估计
+避免前景/背景深度混淆
+边界准确度提升30%
+</code></pre>
+
+<ol start="3">
+<li><strong>时序融合</strong></li>
+</ol>
+<pre class="codehilite"><code class="language-python"># 多帧深度融合
+depth_t = α*depth_t + (1-α)*warp(depth_t-1)
+# 提升远距离深度稳定性
+</code></pre>
+
+<h3 id="634">6.3.4 深度估计在量产中的应用</h3>
+<h4 id="tesla-fsd">Tesla FSD的深度估计策略</h4>
+<p><strong>HydraNet架构 (2019-2021)</strong></p>
+<pre class="codehilite"><code>8摄像头输入
+     ↓
+Shared Backbone
+     ↓
+摄像头专属头部 × 8
+     ↓
+深度+检测+分割
+
+关键技术:
+
+- 相机间深度一致性约束
+- 运动立体增强单目深度
+- 实时性: 36 FPS @ HW3.0
+</code></pre>
+
+<h4 id="_13">中国方案实践</h4>
+<p><strong>小鹏XPILOT深度方案</strong></p>
+<pre class="codehilite"><code>三支路融合:
+
+1. 单目深度网络 (全场景)
+2. 环视立体匹配 (停车场景)
+3. 结构约束 (车道线/路沿)
+     ↓
+  统一深度图
+</code></pre>
+
+<p><strong>地平线深度估计加速</strong></p>
+<pre class="codehilite"><code>量化策略:
+FP32 → INT8
+
+- 深度回归头保持FP16
+- Backbone INT8量化
+- 性能损失 &lt;2%
+- 速度提升 3.5×
+</code></pre>
+
+<h2 id="64">6.4 工程化实践与挑战</h2>
+<h3 id="641">6.4.1 数据工程</h3>
+<h4 id="_14">深度真值获取</h4>
+<p><strong>激光雷达投影</strong></p>
+<pre class="codehilite"><code class="language-python"># LiDAR点云投影到图像获取深度真值
+def project_lidar_to_image(points, T_cam_lidar, K):
+    # 坐标变换
+    points_cam = T_cam_lidar @ points.T
+
+    # 投影
+    uv = K @ points_cam[:3]
+    uv = uv[:2] / uv[2]
+
+    # 深度图
+    depth_map = scatter_max(points_cam[2], uv)
+    return depth_map
+</code></pre>
+
+<p>问题与解决：</p>
+<ul>
+<li>稀疏性: 插值或深度补全网络</li>
+<li>时间同步: 硬件触发 + 软件补偿</li>
+<li>标定精度: 在线标定算法</li>
+</ul>
+<h4 id="_15">困难样本挖掘</h4>
+<pre class="codehilite"><code>困难场景识别:
+
+- 强光/逆光: HDR增强
+- 雨雾天气: 去雾网络
+- 夜晚场景: 多曝光融合
+- 动态物体: 运动分割
+
+自动化挖掘pipeline:
+
+1. 模型推理
+2. 不确定性估计
+3. 人工复核
+4. 重新训练
+</code></pre>
+
+<h3 id="642">6.4.2 模型部署优化</h3>
+<h4 id="tensorrt">TensorRT优化</h4>
+<pre class="codehilite"><code class="language-python"># FP16推理优化
+config.set_flag(trt.BuilderFlag.FP16)
+
+# 动态批处理
+profile.set_shape(&quot;input&quot;, 
+    min=(1,3,384,1280),
+    opt=(4,3,384,1280), 
+    max=(8,3,384,1280))
+
+# Layer融合
+
+- Conv+BN+ReLU → CBR
+- 多个1×1卷积 → Group Conv
+</code></pre>
+
+<p>性能提升:</p>
+<ul>
+<li>FP32→FP16: 1.8× 加速</li>
+<li>算子融合: 1.3× 加速</li>
+<li>动态批处理: 1.2× 吞吐提升</li>
+</ul>
+<h4 id="_16">多任务调度</h4>
+<pre class="codehilite"><code>任务优先级调度:
+┌─────────────────────────┐
+│  高优先级 (10ms)         │
+│  - 前向碰撞检测          │
+│  - 紧急制动              │
+├─────────────────────────┤
+│  中优先级 (33ms)         │
+│  - 3D检测                │
+│  - 车道线检测            │
+├─────────────────────────┤
+│  低优先级 (100ms)        │
+│  - 语义分割              │
+│  - 停车位检测            │
+└─────────────────────────┘
+</code></pre>
+
+<h3 id="643">6.4.3 系统集成挑战</h3>
+<h4 id="_17">传感器时空同步</h4>
+<pre class="codehilite"><code>时间戳对齐:
+Camera: 30Hz ──┐
+              ├→ 统一时间轴 (100Hz)
+LiDAR: 10Hz ───┘
+
+同步策略:
+
+- PTP时钟同步 (&lt;1ms误差)
+- 触发器硬同步
+- 软件插值补偿
+</code></pre>
+
+<h4 id="_18">坐标系统一</h4>
+<pre class="codehilite"><code>坐标系转换链:
+像素坐标系 → 相机坐标系 → 车体坐标系 → 世界坐标系
+   (u,v)      (x,y,z)_cam   (x,y,z)_ego   (lat,lon,alt)
+     ↓            ↓              ↓              ↓
+   内参K      外参T_ego_cam   定位系统      高精地图
+</code></pre>
+
+<h2 id="65">6.5 性能评估与对标</h2>
+<h3 id="651">6.5.1 评价指标体系</h3>
+<h4 id="2d">2D检测指标</h4>
+<ul>
+<li>mAP@IoU=0.5: 主流指标</li>
+<li>mAP@IoU=0.5:0.95: 更严格</li>
+<li>FPS: 实时性要求 &gt;20</li>
+</ul>
+<h4 id="3d_1">3D检测指标</h4>
+<ul>
+<li>3D AP: 3D IoU阈值 (0.7 car, 0.5 ped)</li>
+<li>BEV AP: 鸟瞰图IoU</li>
+<li>AOS: 考虑朝向的AP</li>
+</ul>
+<h4 id="_19">深度估计指标</h4>
+<ul>
+<li>RMSE: 均方根误差</li>
+<li>REL: 相对误差</li>
+<li>δ&lt;1.25: 准确度阈值</li>
+</ul>
+<h3 id="652-2020">6.5.2 主流方案对比 (2020年技术水平)</h3>
+<p>| 公司/方案 | 2D mAP | 3D AP | 深度RMSE | FPS | 硬件平台 |</p>
+<table>
+<thead>
+<tr>
+<th>公司/方案</th>
+<th>2D mAP</th>
+<th>3D AP</th>
+<th>深度RMSE</th>
+<th>FPS</th>
+<th>硬件平台</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tesla FSD</td>
+<td>92.3</td>
+<td>-</td>
+<td>~3.5m</td>
+<td>36</td>
+<td>HW3.0</td>
+</tr>
+<tr>
+<td>MobileEye</td>
+<td>89.7</td>
+<td>35.2</td>
+<td>4.2m</td>
+<td>100</td>
+<td>EyeQ5</td>
+</tr>
+<tr>
+<td>小鹏</td>
+<td>88.5</td>
+<td>31.8</td>
+<td>4.8m</td>
+<td>30</td>
+<td>Xavier</td>
+</tr>
+<tr>
+<td>地平线</td>
+<td>87.2</td>
+<td>28.5</td>
+<td>5.1m</td>
+<td>25</td>
+<td>J3</td>
+</tr>
+<tr>
+<td>Apollo</td>
+<td>90.1</td>
+<td>41.3*</td>
+<td>3.8m*</td>
+<td>20</td>
+<td>GPU+LiDAR</td>
+</tr>
+</tbody>
+</table>
+<p>*注: Apollo使用激光雷达融合</p>
+<h2 id="66">6.6 本章小结</h2>
+<p>2016-2020年是自动驾驶感知技术的关键转型期。深度学习不仅取代了传统CV方法，更重要的是开启了端到端学习的新范式。从2D到3D感知的跨越、多任务学习的兴起、伪激光雷达的创新，这些技术突破为后续的BEV感知和端到端驾驶奠定了基础。</p>
+<p>关键启示：</p>
+<ol>
+<li><strong>表示学习的重要性</strong>: 伪激光雷达证明了表示形式比传感器本身更关键</li>
+<li><strong>多任务协同</strong>: 共享特征不仅节省算力，还能提升性能</li>
+<li><strong>数据驱动</strong>: 大规模数据和自监督学习降低了标注成本</li>
+<li><strong>系统思维</strong>: 感知不是孤立模块，需要与下游任务协同设计</li>
+</ol>
+<p>下一章我们将深入探讨BEV感知革命，看看这些基础技术如何演化成统一的3D感知框架。</p>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter5.html" class="nav-link prev">← 第5章：端到端浪潮 (2023-2024)</a><a href="chapter7.html" class="nav-link next">第7章：BEV感知革命与占据网络 →</a></nav>
+        </main>
+    </div>
+</body>
+</html>
