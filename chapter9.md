@@ -74,6 +74,72 @@ u(t) = Kp·e(t) + Ki·∫e(τ)dτ + Kd·de(t)/dt
 | 2020-2021 | 城市跟车 | 非线性PID | 小鹏NGP |
 | 2022-2024 | 辅助控制 | PID+前馈补偿 | 各家NOA |
 
+#### PID参数整定方法
+
+**Ziegler-Nichols方法**:
+```
+1. 临界增益法:
+   - 设置Ki=Kd=0，只保留Kp
+   - 增加Kp直到系统临界振荡
+   - 记录临界增益Ku和振荡周期Tu
+   - PID参数: Kp=0.6Ku, Ki=2Kp/Tu, Kd=KpTu/8
+
+2. 阶跃响应法:
+   - 施加阶跃输入
+   - 测量延迟时间L和时间常数T
+   - PID参数: Kp=1.2T/L, Ki=Kp/2L, Kd=0.5KpL
+```
+
+**自动驾驶特定优化**:
+```
+纵向控制PID (速度控制):
+- 低速场景 (0-30km/h):
+  Kp=2.0, Ki=0.5, Kd=0.1
+  特点: 响应快，允许轻微超调
+  
+- 中速场景 (30-80km/h):
+  Kp=1.5, Ki=0.3, Kd=0.2
+  特点: 平衡响应和稳定性
+  
+- 高速场景 (>80km/h):
+  Kp=1.0, Ki=0.2, Kd=0.3
+  特点: 强调稳定性，抑制超调
+
+横向控制PID (转向控制):
+- 直道保持:
+  Kp=0.5, Ki=0.05, Kd=0.8
+  特点: 高微分增益，快速响应扰动
+  
+- 弯道跟踪:
+  Kp=1.2, Ki=0.1, Kd=0.4
+  特点: 提高比例增益，改善跟踪性能
+```
+
+#### 抗积分饱和设计
+
+```
+问题描述:
+当执行器饱和时，积分项继续累积导致严重超调
+
+解决方案:
+1. 积分限幅:
+   integral = clip(integral, -I_max, I_max)
+   
+2. 条件积分:
+   IF |error| < threshold AND |output| < saturation:
+      integral += error * dt
+   
+3. 反算法(Back-calculation):
+   e_s = u_saturated - u_desired
+   integral -= Kb * e_s  (Kb为反算增益)
+   
+4. 积分分离:
+   IF |error| > e_threshold:
+      Ki_effective = 0  # 大误差时禁用积分
+   ELSE:
+      Ki_effective = Ki
+```
+
 #### Stanley控制器与Pure Pursuit
 
 **Stanley控制器**（斯坦福大学DARPA挑战赛方案）:
@@ -86,6 +152,11 @@ u(t) = Kp·e(t) + Ki·∫e(τ)dτ + Kd·de(t)/dt
 - e: 横向位置误差
 - v: 车速
 - k: 增益参数
+
+参数调节策略:
+- k值选择: k ∈ [2.5, 5.0]
+- 速度自适应: k = k0 * sqrt(v/v_ref)
+- 稳定性条件: k < 2π*L/v (L为轴距)
 ```
 
 **Pure Pursuit控制器**:
@@ -102,6 +173,39 @@ u(t) = Kp·e(t) + Ki·∫e(τ)dτ + Kd·de(t)/dt
 
 转向角: δ = arctan(2L·sin(α)/ld)
 L: 轴距
+
+前视距离自适应:
+ld = max(ld_min, k_v * v + ld_offset)
+其中:
+- ld_min: 最小前视距离 (5-10m)
+- k_v: 速度系数 (0.3-0.5)
+- ld_offset: 基础偏移 (2-5m)
+```
+
+**控制器对比与选择**:
+
+| 特性 | PID | Stanley | Pure Pursuit | LQR |
+|------|-----|---------|--------------|-----|
+| 计算复杂度 | O(1) | O(1) | O(1) | O(n²) |
+| 参数数量 | 3 | 1-2 | 1-2 | n² |
+| 低速性能 | 良好 | 优秀 | 一般 | 良好 |
+| 高速性能 | 一般 | 良好 | 优秀 | 优秀 |
+| 曲率适应 | 差 | 良好 | 优秀 | 良好 |
+| 调参难度 | 中等 | 简单 | 简单 | 困难 |
+
+**工程实践选择原则**:
+```
+速度 < 30km/h: Stanley控制器
+  - 低速下前视会导致响应迟钝
+  - Stanley的横向误差项更有效
+
+速度 30-80km/h: 混合策略
+  - 权重融合: δ = w*δ_stanley + (1-w)*δ_pursuit
+  - w = exp(-v/v_transition)
+
+速度 > 80km/h: Pure Pursuit为主
+  - 高速需要更大前视距离
+  - 提前响应保证稳定性
 ```
 
 ### 1.2 模型预测控制(MPC)
@@ -157,6 +261,82 @@ v̇ = ax
 | CasADi | O(n²) | 10-30ms | 通用场景 |
 | 显式MPC | O(1) | <1ms | 简单场景 |
 
+#### MPC工程实现细节
+
+**求解器选择与配置**:
+```
+OSQP (Operator Splitting QP):
+- 适用: 凸二次规划问题
+- 特点: 内存占用小，适合嵌入式
+- 配置:
+  alpha = 1.6  # 松弛参数
+  rho = 0.1    # 罚参数
+  eps_abs = 1e-3  # 绝对精度
+  eps_rel = 1e-3  # 相对精度
+  max_iter = 200  # 最大迭代
+
+IPOPT (Interior Point OPTimizer):
+- 适用: 非线性规划问题
+- 特点: 精度高，收敛稳定
+- 配置:
+  tol = 1e-4
+  max_iter = 100
+  linear_solver = "ma57"  # 或 "mumps"
+```
+
+**预测时域选择**:
+```
+城市场景 (低速复杂):
+- 预测时域: N = 20
+- 采样时间: dt = 0.1s
+- 预测长度: 2.0s
+- 权重: Q_pos >> Q_vel (位置精度优先)
+
+高速场景 (高速简单):
+- 预测时域: N = 30
+- 采样时间: dt = 0.1s
+- 预测长度: 3.0s
+- 权重: Q_vel >> Q_acc (平滑性优先)
+```
+
+**约束处理技术**:
+```
+软约束实现:
+min J = J_original + ρ·||ε||²
+s.t. g(x,u) ≤ ε  (ε为松弛变量)
+     ε ≥ 0
+
+优先级约束:
+1. 安全约束 (硬约束):
+   - 碰撞避免
+   - 道路边界
+   
+2. 舒适性约束 (软约束):
+   - 加速度限制
+   - Jerk限制
+   
+3. 效率约束 (最软):
+   - 期望速度
+   - 燃油经济性
+```
+
+**热启动策略**:
+```python
+# 使用上一时刻解作为初始猜测
+def warm_start(prev_solution, dt):
+    # 时移上一时刻的解
+    x_init = shift(prev_solution.x, dt)
+    u_init = shift(prev_solution.u, dt)
+    
+    # 补充最后时刻的值
+    x_init[-1] = extrapolate(x_init[-2:])
+    u_init[-1] = u_init[-2]  # 保持最后控制
+    
+    return x_init, u_init
+
+# 效果: 迭代次数减少50-70%
+```
+
 ### 1.3 线性二次调节器(LQR)
 
 LQR作为最优控制理论的代表，在横向控制中应用广泛。
@@ -201,16 +381,54 @@ B = │ 4 │
    - 轮胎特性非线性
    - 路面附着系数变化
    - 载荷转移影响
+   - 车辆参数时变(载重、轮胎磨损)
 
 2. **参数整定困难**
    - 多工况适应性差
    - 需要大量实车标定
    - 稳定性与性能权衡
+   - 不同车型需重新标定
 
 3. **复杂场景处理**
    - 无法处理非凸约束
    - 多目标优化困难
    - 计算实时性挑战
+   - 突发工况响应不足
+
+#### 实际案例分析
+
+**Tesla Autopilot演进(2016-2019)**:
+```
+AP1.0 (MobileEye):
+- 纯PID控制
+- 固定参数
+- 问题: 弯道表现差, 雨天不稳定
+
+AP2.0 (早期自研):
+- PID+前馈
+- 简单增益调度
+- 问题: 参数爆炸, 边界工况多
+
+AP2.5 (改进版):
+- LQR横向控制
+- MPC纵向控制
+- 改善: 曲线跟踪, 舒适性提升
+```
+
+**小鹏NGP控制器迭代**:
+```
+版本1.0 (2020):
+- Stanley + PID
+- 问题: 高速变道抖动
+
+版本2.0 (2021):
+- MPC统一框架
+- 改进: 变道平滑度提升60%
+
+版本3.0 (2022):
+- MPC + 学习补偿
+- 效果: 接管率降低40%
+```
 
 #### 工程改进方案
 
@@ -230,6 +448,50 @@ B = │ 4 │
 │      底层: PID执行器控制       │
 │    (100-1000Hz, 硬实时)        │
 └────────────────────────────────┘
+```
+
+**层间接口设计**:
+```
+轨迹消息格式:
+message Trajectory {
+  repeated Point points;  // 轨迹点序列
+  repeated double speeds; // 速度剖面
+  repeated double curvatures; // 曲率信息
+  double timestamp;  // 时间戳
+  int32 gear;  // 档位(前进/后退)
+}
+
+控制指令格式:
+message ControlCommand {
+  double steering_angle;  // 方向盘转角
+  double throttle;  // 油门(0-1)
+  double brake;  // 刹车(0-1)
+  double timestamp;
+  ControlMode mode;  // 控制模式
+}
+```
+
+**鲁棒性增强技术**:
+```
+1. 多模型切换:
+IF road_condition == WET:
+    model = wet_road_model
+ELIF road_condition == ICY:
+    model = ice_road_model
+ELSE:
+    model = dry_road_model
+
+2. 参数自适应:
+# 基于性能指标在线调整
+error_integral = ∫|e(t)|dt
+IF error_integral > threshold:
+    Kp *= 1.1  # 增加响应
+    update_time = current_time
+
+3. 扰动观测器:
+# 估计未建模动态和外部扰动
+d̂ = L(y - ŷ)  # L为观测器增益
+u_robust = u_nominal - d̂
 ```
 
 ---
@@ -293,6 +555,55 @@ SAC控制器架构 (Waymo 2021):
      │
      ↓
 动作输出: [δ, a]
+```
+
+**网络架构细节**:
+```python
+class SACController:
+    def __init__(self):
+        # Actor网络 (策略网络)
+        self.actor = nn.Sequential(
+            nn.Linear(128, 256),
+            nn.ReLU(),
+            nn.Linear(256, 256),
+            nn.ReLU(),
+            nn.Linear(256, 4)  # μ_δ, σ_δ, μ_a, σ_a
+        )
+        
+        # Critic网络 (Q函数)
+        self.critic1 = nn.Sequential(
+            nn.Linear(128 + 2, 256),  # state + action
+            nn.ReLU(),
+            nn.Linear(256, 256),
+            nn.ReLU(),
+            nn.Linear(256, 1)  # Q值
+        )
+        
+        # 双Q网络减少过估计
+        self.critic2 = copy.deepcopy(self.critic1)
+        
+        # 目标网络 (软更新)
+        self.target_critic1 = copy.deepcopy(self.critic1)
+        self.target_critic2 = copy.deepcopy(self.critic2)
+```
+
+**训练流程**:
+```
+1. 数据收集:
+   - 人类驾驶数据: 100万英里
+   - 仿真数据: 10亿英里
+   - 实车测试: 10万英里
+
+2. 离线预训练:
+   - 行为克隆初始化
+   - CQL (Conservative Q-Learning)
+   - 批次大小: 256
+   - 学习率: 3e-4
+
+3. 在线微调:
+   - 实车部署
+   - 增量学习
+   - 安全约束
 ```
 
 #### 奖励函数设计
@@ -374,6 +685,59 @@ R_θ = argmax_θ L(θ) = E_τ~π_E[R_θ(τ)] - log Z(θ)
 ### 2.3 自适应控制架构
 
 自适应控制能够实时调整控制参数以适应系统变化，在处理车辆参数变化、路面条件变化等场景中至关重要。
+
+#### 参数辨识方法
+
+```
+递归最小二乘(RLS):
+# 轮胎刚度在线估计
+y(k) = φᵀ(k)θ + e(k)
+
+参数更新:
+θ̂(k) = θ̂(k-1) + K(k)[y(k) - φᵀ(k)θ̂(k-1)]
+K(k) = P(k-1)φ(k)/[λ + φᵀ(k)P(k-1)φ(k)]
+P(k) = [P(k-1) - K(k)φᵀ(k)P(k-1)]/λ
+
+其中:
+- θ: 待估参数 [Cf, Cr]ᵀ (前后轮胎刚度)
+- λ: 遗忘因子 (0.95-0.99)
+- P: 协方差矩阵
+
+卡尔曼滤波估计:
+状态扩增: x_aug = [x; θ]
+系统方程: x_aug(k+1) = f(x_aug(k), u(k))
+观测方程: y(k) = h(x_aug(k))
+```
+
+#### 自适应MPC实现
+
+```
+华为ADS自适应MPC (2023):
+
+1. 场景识别:
+   - 道路类型: 高速/城市/乡村
+   - 天气状况: 晴/雨/雪/雾
+   - 交通密度: 稀疏/正常/拥堵
+   
+2. 模型库:
+   Models = {
+       "highway_dry": Model_HD,
+       "highway_wet": Model_HW,
+       "urban_normal": Model_UN,
+       "urban_crowded": Model_UC,
+       ...
+   }
+   
+3. 在线切换:
+   IF scenario_changed:
+       model = Models[scenario]
+       warm_start_solver()
+       
+4. 性能监控:
+   tracking_error = compute_error()
+   IF tracking_error > threshold:
+       trigger_model_update()
+```
 
 #### 模型参考自适应控制(MRAC)
 
