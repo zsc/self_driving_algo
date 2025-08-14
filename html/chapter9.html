@@ -198,6 +198,90 @@
                     </div>
                 
                     <div class="tree-item " >
+                        <a href="chapter22.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第22章：百度Apollo - 从开放平台到商业化落地</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter23.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第23章：小鹏汽车 - 从NGP到XNGP的全栈自研之路</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter24.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第24章：华为车BU - ADS算法架构深度剖析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter25.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第25章：地平线 - 芯片算法协同设计的典范</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter26.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第26章：大疆车载 - 极致成本控制下的算法创新</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter27.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第27章：Momenta - 量产与L4双线并进</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter28.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第28章：新势力与传统车企 - 中国自动驾驶的多元化探索</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter29.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第29章：L4公司转型之路</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter30.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第30章：ADAS专业供应商 - 本土化破局与差异化生存</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter31.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第31章：算法与芯片协同演进</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter32.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第32章：大模型与世界模型</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter33.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第33章：自动驾驶的终局思考</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
                         <a href="CLAUDE.html" class="tree-link">
                             <span class="tree-icon">📄</span>
                             <span class="tree-title">Untitled</span>
@@ -312,6 +396,70 @@ u(t) = Kp·e(t) + Ki·∫e(τ)dτ + Kd·de(t)/dt
 </tr>
 </tbody>
 </table>
+<h4 id="pid_2">PID参数整定方法</h4>
+<p><strong>Ziegler-Nichols方法</strong>:</p>
+<pre class="codehilite"><code>1. 临界增益法:
+   - 设置Ki=Kd=0，只保留Kp
+   - 增加Kp直到系统临界振荡
+   - 记录临界增益Ku和振荡周期Tu
+   - PID参数: Kp=0.6Ku, Ki=2Kp/Tu, Kd=KpTu/8
+
+2. 阶跃响应法:
+   - 施加阶跃输入
+   - 测量延迟时间L和时间常数T
+   - PID参数: Kp=1.2T/L, Ki=Kp/2L, Kd=0.5KpL
+</code></pre>
+
+<p><strong>自动驾驶特定优化</strong>:</p>
+<pre class="codehilite"><code>纵向控制PID (速度控制):
+
+- 低速场景 (0-30km/h):
+  Kp=2.0, Ki=0.5, Kd=0.1
+  特点: 响应快，允许轻微超调
+
+- 中速场景 (30-80km/h):
+  Kp=1.5, Ki=0.3, Kd=0.2
+  特点: 平衡响应和稳定性
+
+- 高速场景 (&gt;80km/h):
+  Kp=1.0, Ki=0.2, Kd=0.3
+  特点: 强调稳定性，抑制超调
+
+横向控制PID (转向控制):
+
+- 直道保持:
+  Kp=0.5, Ki=0.05, Kd=0.8
+  特点: 高微分增益，快速响应扰动
+
+- 弯道跟踪:
+  Kp=1.2, Ki=0.1, Kd=0.4
+  特点: 提高比例增益，改善跟踪性能
+</code></pre>
+
+<h4 id="_3">抗积分饱和设计</h4>
+<pre class="codehilite"><code>问题描述:
+当执行器饱和时，积分项继续累积导致严重超调
+
+解决方案:
+
+1. 积分限幅:
+   integral = clip(integral, -I_max, I_max)
+
+2. 条件积分:
+   IF |error| &lt; threshold AND |output| &lt; saturation:
+      integral += error * dt
+
+3. 反算法(Back-calculation):
+   e_s = u_saturated - u_desired
+   integral -= Kb * e_s  (Kb为反算增益)
+
+4. 积分分离:
+   IF |error| &gt; e_threshold:
+      Ki_effective = 0  # 大误差时禁用积分
+   ELSE:
+      Ki_effective = Ki
+</code></pre>
+
 <h4 id="stanleypure-pursuit">Stanley控制器与Pure Pursuit</h4>
 <p><strong>Stanley控制器</strong>（斯坦福大学DARPA挑战赛方案）:</p>
 <pre class="codehilite"><code>转向角计算:
@@ -323,6 +471,12 @@ u(t) = Kp·e(t) + Ki·∫e(τ)dτ + Kd·de(t)/dt
 - e: 横向位置误差
 - v: 车速
 - k: 增益参数
+
+参数调节策略:
+
+- k值选择: k ∈ [2.5, 5.0]
+- 速度自适应: k = k0 * sqrt(v/v_ref)
+- 稳定性条件: k &lt; 2π*L/v (L为轴距)
 </code></pre>
 
 <p><strong>Pure Pursuit控制器</strong>:</p>
@@ -338,6 +492,88 @@ u(t) = Kp·e(t) + Ki·∫e(τ)dτ + Kd·de(t)/dt
 
 转向角: δ = arctan(2L·sin(α)/ld)
 L: 轴距
+
+前视距离自适应:
+ld = max(ld_min, k_v * v + ld_offset)
+其中:
+
+- ld_min: 最小前视距离 (5-10m)
+- k_v: 速度系数 (0.3-0.5)
+- ld_offset: 基础偏移 (2-5m)
+</code></pre>
+
+<p><strong>控制器对比与选择</strong>:</p>
+<p>| 特性 | PID | Stanley | Pure Pursuit | LQR |</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>PID</th>
+<th>Stanley</th>
+<th>Pure Pursuit</th>
+<th>LQR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计算复杂度</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>O(n²)</td>
+</tr>
+<tr>
+<td>参数数量</td>
+<td>3</td>
+<td>1-2</td>
+<td>1-2</td>
+<td>n²</td>
+</tr>
+<tr>
+<td>低速性能</td>
+<td>良好</td>
+<td>优秀</td>
+<td>一般</td>
+<td>良好</td>
+</tr>
+<tr>
+<td>高速性能</td>
+<td>一般</td>
+<td>良好</td>
+<td>优秀</td>
+<td>优秀</td>
+</tr>
+<tr>
+<td>曲率适应</td>
+<td>差</td>
+<td>良好</td>
+<td>优秀</td>
+<td>良好</td>
+</tr>
+<tr>
+<td>调参难度</td>
+<td>中等</td>
+<td>简单</td>
+<td>简单</td>
+<td>困难</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程实践选择原则</strong>:</p>
+<pre class="codehilite"><code>速度 &lt; 30km/h: Stanley控制器
+
+  - 低速下前视会导致响应迟钝
+  - Stanley的横向误差项更有效
+
+速度 30-80km/h: 混合策略
+
+  - 权重融合: δ = w*δ_stanley + (1-w)*δ_pursuit
+  - w = exp(-v/v_transition)
+
+速度 &gt; 80km/h: Pure Pursuit为主
+
+  - 高速需要更大前视距离
+  - 提前响应保证稳定性
 </code></pre>
 
 <h3 id="12-mpc">1.2 模型预测控制(MPC)</h3>
@@ -354,7 +590,7 @@ min J = Σ(k=0 to N-1) [||x(k)-xref(k)||²Q + ||u(k)||²R] + ||x(N)-xref(N)||²P
 - 舒适性约束: |Δu(k)| ≤ Δumax
 </code></pre>
 
-<h4 id="_3">车辆动力学模型</h4>
+<h4 id="_4">车辆动力学模型</h4>
 <p><strong>运动学模型（低速场景）</strong>:</p>
 <pre class="codehilite"><code>状态方程:
 ẋ = v·cos(ψ)
@@ -416,6 +652,82 @@ v̇ = ax
 </tr>
 </tbody>
 </table>
+<h4 id="mpc_2">MPC工程实现细节</h4>
+<p><strong>求解器选择与配置</strong>:</p>
+<pre class="codehilite"><code>OSQP (Operator Splitting QP):
+
+- 适用: 凸二次规划问题
+- 特点: 内存占用小，适合嵌入式
+- 配置:
+  alpha = 1.6  # 松弛参数
+  rho = 0.1    # 罚参数
+  eps_abs = 1e-3  # 绝对精度
+  eps_rel = 1e-3  # 相对精度
+  max_iter = 200  # 最大迭代
+
+IPOPT (Interior Point OPTimizer):
+
+- 适用: 非线性规划问题
+- 特点: 精度高，收敛稳定
+- 配置:
+  tol = 1e-4
+  max_iter = 100
+  linear_solver = &quot;ma57&quot;  # 或 &quot;mumps&quot;
+</code></pre>
+
+<p><strong>预测时域选择</strong>:</p>
+<pre class="codehilite"><code>城市场景 (低速复杂):
+
+- 预测时域: N = 20
+- 采样时间: dt = 0.1s
+- 预测长度: 2.0s
+- 权重: Q_pos &gt;&gt; Q_vel (位置精度优先)
+
+高速场景 (高速简单):
+
+- 预测时域: N = 30
+- 采样时间: dt = 0.1s
+- 预测长度: 3.0s
+- 权重: Q_vel &gt;&gt; Q_acc (平滑性优先)
+</code></pre>
+
+<p><strong>约束处理技术</strong>:</p>
+<pre class="codehilite"><code>软约束实现:
+min J = J_original + ρ·||ε||²
+s.t. g(x,u) ≤ ε  (ε为松弛变量)
+     ε ≥ 0
+
+优先级约束:
+
+1. 安全约束 (硬约束):
+   - 碰撞避免
+   - 道路边界
+
+2. 舒适性约束 (软约束):
+   - 加速度限制
+   - Jerk限制
+
+3. 效率约束 (最软):
+   - 期望速度
+   - 燃油经济性
+</code></pre>
+
+<p><strong>热启动策略</strong>:</p>
+<pre class="codehilite"><code class="language-python"># 使用上一时刻解作为初始猜测
+def warm_start(prev_solution, dt):
+    # 时移上一时刻的解
+    x_init = shift(prev_solution.x, dt)
+    u_init = shift(prev_solution.u, dt)
+
+    # 补充最后时刻的值
+    x_init[-1] = extrapolate(x_init[-2:])
+    u_init[-1] = u_init[-2]  # 保持最后控制
+
+    return x_init, u_init
+
+# 效果: 迭代次数减少50-70%
+</code></pre>
+
 <h3 id="13-lqr">1.3 线性二次调节器(LQR)</h3>
 <p>LQR作为最优控制理论的代表，在横向控制中应用广泛。</p>
 <h4 id="lqr">LQR问题设计</h4>
@@ -447,28 +759,69 @@ B = │ 4 │
 </code></pre>
 
 <h3 id="14">1.4 经典控制的局限性与改进</h3>
-<h4 id="_4">局限性分析</h4>
+<h4 id="_5">局限性分析</h4>
 <ol>
 <li>
 <p><strong>模型失配问题</strong>
    - 轮胎特性非线性
    - 路面附着系数变化
-   - 载荷转移影响</p>
+   - 载荷转移影响
+   - 车辆参数时变(载重、轮胎磨损)</p>
 </li>
 <li>
 <p><strong>参数整定困难</strong>
    - 多工况适应性差
    - 需要大量实车标定
-   - 稳定性与性能权衡</p>
+   - 稳定性与性能权衡
+   - 不同车型需重新标定</p>
 </li>
 <li>
 <p><strong>复杂场景处理</strong>
    - 无法处理非凸约束
    - 多目标优化困难
-   - 计算实时性挑战</p>
+   - 计算实时性挑战
+   - 突发工况响应不足</p>
 </li>
 </ol>
-<h4 id="_5">工程改进方案</h4>
+<h4 id="_6">实际案例分析</h4>
+<p><strong>Tesla Autopilot演进(2016-2019)</strong>:</p>
+<pre class="codehilite"><code>AP1.0 (MobileEye):
+
+- 纯PID控制
+- 固定参数
+- 问题: 弯道表现差, 雨天不稳定
+
+AP2.0 (早期自研):
+
+- PID+前馈
+- 简单增益调度
+- 问题: 参数爆炸, 边界工况多
+
+AP2.5 (改进版):
+
+- LQR横向控制
+- MPC纵向控制
+- 改善: 曲线跟踪, 舒适性提升
+</code></pre>
+
+<p><strong>小鹏NGP控制器迭代</strong>:</p>
+<pre class="codehilite"><code>版本1.0 (2020):
+
+- Stanley + PID
+- 问题: 高速变道抖动
+
+版本2.0 (2021):
+
+- MPC统一框架
+- 改进: 变道平滑度提升60%
+
+版本3.0 (2022):
+
+- MPC + 学习补偿
+- 效果: 接管率降低40%
+</code></pre>
+
+<h4 id="_7">工程改进方案</h4>
 <pre class="codehilite"><code>分层控制架构:
 ┌────────────────────────────────┐
 │      上层: 轨迹规划            │
@@ -484,6 +837,48 @@ B = │ 4 │
 │      底层: PID执行器控制       │
 │    (100-1000Hz, 硬实时)        │
 └────────────────────────────────┘
+</code></pre>
+
+<p><strong>层间接口设计</strong>:</p>
+<pre class="codehilite"><code>轨迹消息格式:
+message Trajectory {
+  repeated Point points;  // 轨迹点序列
+  repeated double speeds; // 速度剖面
+  repeated double curvatures; // 曲率信息
+  double timestamp;  // 时间戳
+  int32 gear;  // 档位(前进/后退)
+}
+
+控制指令格式:
+message ControlCommand {
+  double steering_angle;  // 方向盘转角
+  double throttle;  // 油门(0-1)
+  double brake;  // 刹车(0-1)
+  double timestamp;
+  ControlMode mode;  // 控制模式
+}
+</code></pre>
+
+<p><strong>鲁棒性增强技术</strong>:</p>
+<pre class="codehilite"><code>1. 多模型切换:
+IF road_condition == WET:
+    model = wet_road_model
+ELIF road_condition == ICY:
+    model = ice_road_model
+ELSE:
+    model = dry_road_model
+
+2. 参数自适应:
+# 基于性能指标在线调整
+error_integral = ∫|e(t)|dt
+IF error_integral &gt; threshold:
+    Kp *= 1.1  # 增加响应
+    update_time = current_time
+
+3. 扰动观测器:
+# 估计未建模动态和外部扰动
+d̂ = L(y - ŷ)  # L为观测器增益
+u_robust = u_nominal - d̂
 </code></pre>
 
 <hr />
@@ -576,7 +971,54 @@ V^π(s) = E[Σ(γ^t·r_t) | s_0=s, π]
 动作输出: [δ, a]
 </code></pre>
 
-<h4 id="_6">奖励函数设计</h4>
+<p><strong>网络架构细节</strong>:</p>
+<pre class="codehilite"><code class="language-python">class SACController:
+    def __init__(self):
+        # Actor网络 (策略网络)
+        self.actor = nn.Sequential(
+            nn.Linear(128, 256),
+            nn.ReLU(),
+            nn.Linear(256, 256),
+            nn.ReLU(),
+            nn.Linear(256, 4)  # μ_δ, σ_δ, μ_a, σ_a
+        )
+
+        # Critic网络 (Q函数)
+        self.critic1 = nn.Sequential(
+            nn.Linear(128 + 2, 256),  # state + action
+            nn.ReLU(),
+            nn.Linear(256, 256),
+            nn.ReLU(),
+            nn.Linear(256, 1)  # Q值
+        )
+
+        # 双Q网络减少过估计
+        self.critic2 = copy.deepcopy(self.critic1)
+
+        # 目标网络 (软更新)
+        self.target_critic1 = copy.deepcopy(self.critic1)
+        self.target_critic2 = copy.deepcopy(self.critic2)
+</code></pre>
+
+<p><strong>训练流程</strong>:</p>
+<pre class="codehilite"><code>1. 数据收集:
+   - 人类驾驶数据: 100万英里
+   - 仿真数据: 10亿英里
+   - 实车测试: 10万英里
+
+2. 离线预训练:
+   - 行为克隆初始化
+   - CQL (Conservative Q-Learning)
+   - 批次大小: 256
+   - 学习率: 3e-4
+
+3. 在线微调:
+   - 实车部署
+   - 增量学习
+   - 安全约束
+</code></pre>
+
+<h4 id="_8">奖励函数设计</h4>
 <pre class="codehilite"><code class="language-python"># 复合奖励函数设计
 R_total = w1·R_safety + w2·R_comfort + w3·R_efficiency + w4·R_tracking
 
@@ -645,6 +1087,56 @@ R_θ = argmax_θ L(θ) = E_τ~π_E[R_θ(τ)] - log Z(θ)
 
 <h3 id="23">2.3 自适应控制架构</h3>
 <p>自适应控制能够实时调整控制参数以适应系统变化，在处理车辆参数变化、路面条件变化等场景中至关重要。</p>
+<h4 id="_9">参数辨识方法</h4>
+<pre class="codehilite"><code>递归最小二乘(RLS):
+# 轮胎刚度在线估计
+y(k) = φᵀ(k)θ + e(k)
+
+参数更新:
+θ̂(k) = θ̂(k-1) + K(k)[y(k) - φᵀ(k)θ̂(k-1)]
+K(k) = P(k-1)φ(k)/[λ + φᵀ(k)P(k-1)φ(k)]
+P(k) = [P(k-1) - K(k)φᵀ(k)P(k-1)]/λ
+
+其中:
+
+- θ: 待估参数 [Cf, Cr]ᵀ (前后轮胎刚度)
+- λ: 遗忘因子 (0.95-0.99)
+- P: 协方差矩阵
+
+卡尔曼滤波估计:
+状态扩增: x_aug = [x; θ]
+系统方程: x_aug(k+1) = f(x_aug(k), u(k))
+观测方程: y(k) = h(x_aug(k))
+</code></pre>
+
+<h4 id="mpc_3">自适应MPC实现</h4>
+<pre class="codehilite"><code>华为ADS自适应MPC (2023):
+
+1. 场景识别:
+   - 道路类型: 高速/城市/乡村
+   - 天气状况: 晴/雨/雪/雾
+   - 交通密度: 稀疏/正常/拥堵
+
+2. 模型库:
+   Models = {
+       &quot;highway_dry&quot;: Model_HD,
+       &quot;highway_wet&quot;: Model_HW,
+       &quot;urban_normal&quot;: Model_UN,
+       &quot;urban_crowded&quot;: Model_UC,
+       ...
+   }
+
+3. 在线切换:
+   IF scenario_changed:
+       model = Models[scenario]
+       warm_start_solver()
+
+4. 性能监控:
+   tracking_error = compute_error()
+   IF tracking_error &gt; threshold:
+       trigger_model_update()
+</code></pre>
+
 <h4 id="mrac">模型参考自适应控制(MRAC)</h4>
 <pre class="codehilite"><code>MRAC架构:
                 参考模型
@@ -683,7 +1175,7 @@ V̇ = s·ṡ &lt; -η|s|  (η &gt; 0)
 sat(s/φ) 代替 sign(s)
 </code></pre>
 
-<h4 id="_7">自适应参数整定实例</h4>
+<h4 id="_10">自适应参数整定实例</h4>
 <pre class="codehilite"><code>Tesla Autopilot参数自适应 (2020):
 
 参数集:
@@ -709,7 +1201,7 @@ ELIF rain_detected OR friction &lt; 0.5:
 
 <h3 id="24">2.4 混合控制策略</h3>
 <p>结合经典控制和学习控制的优势，形成安全可靠的混合控制架构。</p>
-<h4 id="_8">分层混合架构</h4>
+<h4 id="_11">分层混合架构</h4>
 <pre class="codehilite"><code>三层混合控制:
 ┌─────────────────────────────────┐
 │   L3: 学习层 (RL/IL)            │
@@ -733,7 +1225,7 @@ ELIF rain_detected OR friction &lt; 0.5:
 └─────────────────────────────────┘
 </code></pre>
 
-<h4 id="_9">残差学习控制</h4>
+<h4 id="_12">残差学习控制</h4>
 <pre class="codehilite"><code>控制输出组合:
 u_total = u_base + u_residual
 
@@ -751,7 +1243,7 @@ min E[||u_expert - (u_base + f_θ(s))||²]
 - 可解释性增强
 </code></pre>
 
-<h4 id="_10">安全过滤器设计</h4>
+<h4 id="_13">安全过滤器设计</h4>
 <pre class="codehilite"><code>控制屏障函数(CBF):
 h(x) ≥ 0  定义安全集
 
@@ -770,7 +1262,7 @@ u_learning → CBF过滤器 → u_safe → 执行器
 <hr />
 <h2 id="3">3. 端到端规控一体化架构</h2>
 <h3 id="31">3.1 规控一体化演进历程</h3>
-<h4 id="_11">发展阶段</h4>
+<h4 id="_14">发展阶段</h4>
 <pre class="codehilite"><code>2016-2018: 模块化时代
 ┌──────┐ → ┌──────┐ → ┌──────┐ → ┌──────┐
 │ 感知 │   │ 预测 │   │ 规划 │   │ 控制 │
@@ -791,7 +1283,7 @@ u_learning → CBF过滤器 → u_safe → 执行器
 优势: 全局优化、数据驱动、简化架构
 </code></pre>
 
-<h4 id="_12">关键技术驱动因素</h4>
+<h4 id="_15">关键技术驱动因素</h4>
 <p>| 时期 | 技术突破 | 影响 | 代表成果 |</p>
 <table>
 <thead>
@@ -865,7 +1357,7 @@ Transformer Decoder
 - 推理延迟: &lt;100ms@FSD Chip
 </code></pre>
 
-<h4 id="_13">中国端到端方案对比</h4>
+<h4 id="_16">中国端到端方案对比</h4>
 <p>| 厂商 | 方案名称 | 架构特点 | 控制输出 | 上车状态 |</p>
 <table>
 <thead>
@@ -908,7 +1400,7 @@ Transformer Decoder
 </tr>
 </tbody>
 </table>
-<h4 id="_14">控制输出表示方法</h4>
+<h4 id="_17">控制输出表示方法</h4>
 <pre class="codehilite"><code>1. 直接控制输出:
    output = [δ(t), a(t)]  # 转向角、加速度
 
@@ -930,7 +1422,7 @@ Transformer Decoder
 </code></pre>
 
 <h3 id="33">3.3 可解释性与安全保证</h3>
-<h4 id="_15">可解释性技术</h4>
+<h4 id="_18">可解释性技术</h4>
 <pre class="codehilite"><code>注意力可视化:
 ┌─────────────────────────────┐
 │   Multi-Head Attention      │
@@ -951,7 +1443,7 @@ Transformer Decoder
 - 决策逻辑: 行为原语激活
 </code></pre>
 
-<h4 id="_16">安全保证机制</h4>
+<h4 id="_19">安全保证机制</h4>
 <pre class="codehilite"><code>多层安全架构:
 
 L4: 规则后处理
@@ -967,7 +1459,7 @@ L1: 底层保护
     执行器限幅、紧急制动
 </code></pre>
 
-<h4 id="_17">形式化验证方法</h4>
+<h4 id="_20">形式化验证方法</h4>
 <pre class="codehilite"><code>安全规约:
 φ_safety: □(d_min &gt; d_safe)  # 始终保持安全距离
 φ_comfort: □(|a_lat| &lt; a_max)  # 横向加速度约束
@@ -982,7 +1474,7 @@ L1: 底层保护
 </code></pre>
 
 <h3 id="34">3.4 主流方案对比</h3>
-<h4 id="_18">技术路线对比</h4>
+<h4 id="_21">技术路线对比</h4>
 <pre class="codehilite"><code>纯端到端 (Tesla FSD V12):
 Cameras → Neural Network → Control
 优势: 简洁、数据驱动
@@ -999,7 +1491,7 @@ Perception → NN Planner → MPC Controller
 劣势: 接口设计复杂
 </code></pre>
 
-<h4 id="_19">训练策略对比</h4>
+<h4 id="_22">训练策略对比</h4>
 <p>| 策略 | 数据需求 | 训练难度 | 泛化能力 | 应用案例 |</p>
 <table>
 <thead>
@@ -1042,7 +1534,7 @@ Perception → NN Planner → MPC Controller
 </tr>
 </tbody>
 </table>
-<h4 id="_20">评估指标体系</h4>
+<h4 id="_23">评估指标体系</h4>
 <pre class="codehilite"><code>安全性指标:
 
 - 碰撞率: collisions/mile
@@ -1070,7 +1562,7 @@ Perception → NN Planner → MPC Controller
 <hr />
 <h2 id="4">4. 执行器协同与容错控制</h2>
 <h3 id="41">4.1 线控底盘技术演进</h3>
-<h4 id="_21">线控技术发展历程</h4>
+<h4 id="_24">线控技术发展历程</h4>
 <pre class="codehilite"><code>传统机械控制 (Pre-2010):
 驾驶员 → 机械连接 → 执行器
 
@@ -1093,7 +1585,7 @@ Perception → NN Planner → MPC Controller
 - 线控油门 (Throttle-by-Wire)
 </code></pre>
 
-<h4 id="_22">主流线控底盘方案</h4>
+<h4 id="_25">主流线控底盘方案</h4>
 <p>| 供应商 | 产品 | 技术特点 | 响应时间 | 应用车型 |</p>
 <table>
 <thead>
@@ -1143,7 +1635,7 @@ Perception → NN Planner → MPC Controller
 </tr>
 </tbody>
 </table>
-<h4 id="_23">执行器接口协议</h4>
+<h4 id="_26">执行器接口协议</h4>
 <pre class="codehilite"><code>CAN总线控制报文 (500kbps):
 ┌──────────────────────────────────┐
 │ ID: 0x180 (转向控制)              │
@@ -1163,7 +1655,7 @@ FlexRay协议 (10Mbps, 双通道冗余):
 </code></pre>
 
 <h3 id="42">4.2 执行器冗余设计</h3>
-<h4 id="_24">冗余架构设计</h4>
+<h4 id="_27">冗余架构设计</h4>
 <pre class="codehilite"><code>三重冗余系统:
              主控制器
                 │
@@ -1184,7 +1676,7 @@ FlexRay协议 (10Mbps, 双通道冗余):
 4. 安全停车程序
 </code></pre>
 
-<h4 id="_25">执行器故障模式</h4>
+<h4 id="_28">执行器故障模式</h4>
 <pre class="codehilite"><code>故障检测与隔离 (FDI):
 
 监控信号:
@@ -1211,7 +1703,7 @@ FlexRay协议 (10Mbps, 双通道冗余):
 </code></pre>
 
 <h3 id="43">4.3 故障检测与容错策略</h3>
-<h4 id="_26">实时故障检测算法</h4>
+<h4 id="_29">实时故障检测算法</h4>
 <pre class="codehilite"><code class="language-python"># 基于残差的故障检测
 r(t) = y(t) - ŷ(t)  # 残差计算
 
@@ -1228,7 +1720,7 @@ IF score &gt; threshold:
     anomaly_detected()
 </code></pre>
 
-<h4 id="_27">容错控制策略</h4>
+<h4 id="_30">容错控制策略</h4>
 <pre class="codehilite"><code>分级容错方案:
 
 Level 0: 正常运行
@@ -1251,7 +1743,7 @@ Level 3: 最小风险机动
 └─ 危险警告
 </code></pre>
 
-<h4 id="_28">执行器补偿算法</h4>
+<h4 id="_31">执行器补偿算法</h4>
 <pre class="codehilite"><code>非线性补偿:
 u_compensated = u_desired + f_comp(u_desired, state)
 
@@ -1268,7 +1760,7 @@ u_comp = θ̂ᵀφ(x)
 </code></pre>
 
 <h3 id="44">4.4 执行器标定与补偿</h3>
-<h4 id="_29">标定流程</h4>
+<h4 id="_32">标定流程</h4>
 <pre class="codehilite"><code>离线标定:
 
 1. 静态特性标定
@@ -1294,7 +1786,7 @@ u_comp = θ̂ᵀφ(x)
 └─────────────────────────┘
 </code></pre>
 
-<h4 id="_30">查表与插值</h4>
+<h4 id="_33">查表与插值</h4>
 <pre class="codehilite"><code>2D查表 (速度-转角):
          转角指令 (deg)
       -30  -15   0   15   30
@@ -1314,7 +1806,7 @@ f(x,y) = f₀₀(1-α)(1-β) + f₁₀α(1-β) +
 <hr />
 <h2 id="5">5. 控制算法的芯片加速与实时性</h2>
 <h3 id="51">5.1 实时性要求与挑战</h3>
-<h4 id="_31">控制系统时延分解</h4>
+<h4 id="_34">控制系统时延分解</h4>
 <pre class="codehilite"><code>总时延构成:
 T_total = T_sense + T_compute + T_comm + T_actuate
 
@@ -1335,7 +1827,7 @@ T_actuate: 执行器响应 (20-100ms)
 └─────────────────────────────┘
 </code></pre>
 
-<h4 id="_32">实时性挑战</h4>
+<h4 id="_35">实时性挑战</h4>
 <pre class="codehilite"><code>计算资源竞争:
       CPU/GPU资源分配
            ↓
@@ -1356,7 +1848,7 @@ T_actuate: 执行器响应 (20-100ms)
 </code></pre>
 
 <h3 id="52">5.2 控制算法的硬件加速</h3>
-<h4 id="_33">专用加速器设计</h4>
+<h4 id="_36">专用加速器设计</h4>
 <pre class="codehilite"><code>MPC加速器架构:
 ┌────────────────────────────────┐
 │     QP Solver Accelerator      │
@@ -1400,7 +1892,7 @@ __global__ void mpc_prediction_kernel(
 </code></pre>
 
 <h3 id="53">5.3 多核并行与任务调度</h3>
-<h4 id="_34">任务分解策略</h4>
+<h4 id="_37">任务分解策略</h4>
 <pre class="codehilite"><code>控制任务DAG图:
      传感器数据
          ↓
@@ -1427,7 +1919,7 @@ __global__ void mpc_prediction_kernel(
 - 流水线并行: 多帧流水处理
 </code></pre>
 
-<h4 id="_35">实时调度算法</h4>
+<h4 id="_38">实时调度算法</h4>
 <pre class="codehilite"><code>RMS (Rate Monotonic Scheduling):
 优先级 = 1/周期
 
@@ -1446,7 +1938,7 @@ EDF (Earliest Deadline First):
 </code></pre>
 
 <h3 id="54">5.4 延迟补偿与预测控制</h3>
-<h4 id="_36">延迟补偿策略</h4>
+<h4 id="_39">延迟补偿策略</h4>
 <pre class="codehilite"><code>Smith预测器:
           ┌─────────────┐
     r ────┤   C(s)      ├──── u
@@ -1465,7 +1957,7 @@ x̂(t+τ) = Φ(τ)x(t) + ∫₀^τ Φ(τ-σ)Bu(σ)dσ
 x̂(k+d) = A^d·x(k) + Σ(i=0 to d-1) A^i·B·u(k-i)
 </code></pre>
 
-<h4 id="_37">预测控制优化</h4>
+<h4 id="_40">预测控制优化</h4>
 <pre class="codehilite"><code>多速率控制架构:
 高频层 (100Hz):
 
@@ -1490,7 +1982,7 @@ x̂(k+d) = A^d·x(k) + Σ(i=0 to d-1) A^i·B·u(k-i)
 执行:  □□□□  □□□□  □□□□  ■□□□
 </code></pre>
 
-<h4 id="_38">性能评估指标</h4>
+<h4 id="_41">性能评估指标</h4>
 <pre class="codehilite"><code>实时性指标:
 
 - 平均延迟: μ_delay
@@ -1514,7 +2006,7 @@ x̂(k+d) = A^d·x(k) + Σ(i=0 to d-1) A^i·B·u(k-i)
 </code></pre>
 
 <hr />
-<h2 id="_39">总结</h2>
+<h2 id="_42">总结</h2>
 <p>控制算法作为自动驾驶的执行环节，其性能直接影响驾驶安全性和舒适性。从2016年至今的演进历程显示：</p>
 <ol>
 <li>

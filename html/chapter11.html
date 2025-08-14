@@ -198,6 +198,90 @@
                     </div>
                 
                     <div class="tree-item " >
+                        <a href="chapter22.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第22章：百度Apollo - 从开放平台到商业化落地</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter23.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第23章：小鹏汽车 - 从NGP到XNGP的全栈自研之路</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter24.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第24章：华为车BU - ADS算法架构深度剖析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter25.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第25章：地平线 - 芯片算法协同设计的典范</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter26.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第26章：大疆车载 - 极致成本控制下的算法创新</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter27.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第27章：Momenta - 量产与L4双线并进</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter28.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第28章：新势力与传统车企 - 中国自动驾驶的多元化探索</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter29.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第29章：L4公司转型之路</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter30.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第30章：ADAS专业供应商 - 本土化破局与差异化生存</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter31.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第31章：算法与芯片协同演进</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter32.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第32章：大模型与世界模型</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter33.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第33章：自动驾驶的终局思考</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
                         <a href="CLAUDE.html" class="tree-link">
                             <span class="tree-icon">📄</span>
                             <span class="tree-title">Untitled</span>
@@ -229,6 +313,39 @@
 • 迭代周期：3-6个月
 </code></pre>
 
+<p><strong>早期数据采集痛点</strong>：</p>
+<ol>
+<li>
+<p><strong>采集车成本高昂</strong>
+   - 单车改装成本：$50,000-200,000
+   - 传感器配置：64线激光雷达 + 6-8个相机 + GPS/IMU
+   - 存储系统：8-16TB车载存储，需定期更换硬盘
+   - 人力成本：专业安全员 + 数据操作员</p>
+</li>
+<li>
+<p><strong>数据分布不均</strong></p>
+</li>
+</ol>
+<pre class="codehilite"><code>典型数据分布问题
+┌────────────────────────────────┐
+│ 场景类型    │ 实际分布 │ 需求分布│
+├────────────────────────────────┤
+│ 直道行驶    │   70%   │   20%  │
+│ 变道超车    │   15%   │   20%  │
+│ 路口通行    │   10%   │   30%  │
+│ 异常场景    │    3%   │   20%  │
+│ 极端天气    │    2%   │   10%  │
+└────────────────────────────────┘
+问题：高价值场景采集不足
+</code></pre>
+
+<ol start="3">
+<li><strong>标注瓶颈</strong>
+   - 3D框标注：15-30分钟/帧（复杂场景）
+   - 语义分割：2-3小时/帧（像素级）
+   - 质检返工率：20-30%
+   - 标注一致性：不同标注员差异显著</li>
+</ol>
 <h4 id="2019-2022">第二代：影子模式与触发采集 (2019-2022)</h4>
 <pre class="codehilite"><code>影子模式架构
 ┌─────────────────────────────────────────┐
@@ -253,7 +370,122 @@ Tesla影子模式创新：
 • 覆盖：真实世界的长尾分布
 </code></pre>
 
+<p><strong>影子模式技术细节</strong>：</p>
+<ol>
+<li><strong>触发器设计</strong></li>
+</ol>
+<pre class="codehilite"><code>触发器类型与优先级
+┌──────────────────────────────────────────┐
+│ 触发类型        │ 优先级 │ 上传概率 │ 带宽│
+├──────────────────────────────────────────┤
+│ 碰撞/事故      │  P0   │  100%   │ 全量 │
+│ 人工接管       │  P1   │  100%   │ 30s  │
+│ 急刹车(&gt;5m/s²) │  P1   │   80%   │ 10s  │
+│ 模型分歧&gt;阈值   │  P2   │   50%   │ 5s   │
+│ 新场景检测     │  P2   │   30%   │ 3s   │
+│ 预测误差大     │  P3   │   20%   │ 关键帧│
+│ 随机采样       │  P4   │    5%   │ 1帧  │
+└──────────────────────────────────────────┘
+</code></pre>
+
+<ol start="2">
+<li><strong>分歧检测算法</strong></li>
+</ol>
+<pre class="codehilite"><code class="language-python"># 主系统与影子系统输出对比
+def compute_disagreement(main_output, shadow_output):
+    # 轨迹分歧：使用Frechet距离
+    traj_diff = frechet_distance(
+        main_output.trajectory,
+        shadow_output.trajectory
+    )
+
+    # 感知分歧：IoU和分类差异
+    perception_diff = 1.0 - compute_iou(
+        main_output.detections,
+        shadow_output.detections
+    )
+
+    # 决策分歧：动作不一致
+    action_diff = (
+        main_output.action != shadow_output.action
+    )
+
+    # 加权分歧分数
+    total_disagreement = (
+        0.4 * traj_diff + 
+        0.3 * perception_diff + 
+        0.3 * action_diff
+    )
+
+    return total_disagreement &gt; threshold
+</code></pre>
+
+<ol start="3">
+<li><strong>数据传输优化</strong>
+   - 边缘压缩：H.265编码，压缩率10:1
+   - 智能采样：关键帧提取，减少90%数据量
+   - 断点续传：4G/5G网络自适应
+   - 夜间上传：利用闲时带宽，降低成本</li>
+</ol>
 <h4 id="2022-">第三代：自动化数据闭环 (2022-至今)</h4>
+<p><strong>数据闭环2.0特征</strong>：</p>
+<ol>
+<li>
+<p><strong>实时性提升</strong>
+   - 数据采集到模型更新：48小时内完成
+   - 热修复能力：critical场景24小时内修复
+   - A/B测试：影子模式实时验证新版本</p>
+</li>
+<li>
+<p><strong>智能化采集策略</strong></p>
+</li>
+</ol>
+<pre class="codehilite"><code>主动学习采集框架
+┌────────────────────────────────────┐
+│       不确定性评估模块              │
+│  • 认知不确定性 (Epistemic)        │
+│  • 偶然不确定性 (Aleatoric)        │
+│  • OOD检测 (Out-of-Distribution)   │
+└────────────┬───────────────────────┘
+             ↓
+┌────────────────────────────────────┐
+│       价值评估模块                  │
+│  • 模型改进潜力评分                │
+│  • 场景稀缺度评分                  │
+│  • 安全关键度评分                  │
+└────────────┬───────────────────────┘
+             ↓
+┌────────────────────────────────────┐
+│       采集决策                      │
+│  Score = α*Uncertainty +            │
+│          β*Value +                  │
+│          γ*Rarity                  │
+└────────────────────────────────────┘
+</code></pre>
+
+<ol start="3">
+<li><strong>联邦学习架构</strong></li>
+</ol>
+<pre class="codehilite"><code>车端-云端联邦学习
+┌─────────────────────────────────────┐
+│         云端聚合服务器               │
+│    Global Model Parameters          │
+└────────────┬───────────────────────┘
+             ↓ (模型下发)
+┌──────┬──────┬──────┬──────┬──────┐
+│ Car1 │ Car2 │ Car3 │ ... │ CarN  │
+│Local │Local │Local │     │Local  │
+│Train │Train │Train │     │Train  │
+└──┬───┴──┬───┴──┬───┴─────┴──┬───┘
+   ↓      ↓      ↓            ↓
+(梯度上传，差分隐私保护)
+   ↓      ↓      ↓            ↓
+┌─────────────────────────────────┐
+│      安全聚合 (Secure Aggregation) │
+│      FedAvg / FedProx / FedOpt    │
+└─────────────────────────────────┘
+</code></pre>
+
 <pre class="codehilite"><code>现代数据闭环系统
                      ┌─────────────┐
                      │  车端推理    │
@@ -290,7 +522,34 @@ Tesla影子模式创新：
 
 <h3 id="1112">11.1.2 自动标注技术栈</h3>
 <h4 id="_2">基础自动标注方法</h4>
-<p>| 技术类型 | 方法原理 | 精度水平 | 适用场景 |</p>
+<p><strong>技术演进路线</strong>：</p>
+<pre class="codehilite"><code>自动标注技术代际演进
+
+Gen 1 (2018-2020): 简单投影
+├─ 2D检测 + 深度估计
+├─ 精度: 60-70%
+└─ 人工修正: 40%
+
+Gen 2 (2020-2022): 多视图几何
+├─ 多相机联合优化
+├─ 时序跟踪补全
+├─ 精度: 80-85%
+└─ 人工修正: 15%
+
+Gen 3 (2022-2023): 神经重建
+├─ NeRF场景重建
+├─ 4D标注(3D+时间)
+├─ 精度: 90-95%
+└─ 人工修正: 5%
+
+Gen 4 (2023-至今): 基础模型
+├─ VLM理解 + 生成
+├─ 零样本泛化
+├─ 精度: 95-99%
+└─ 人工修正: &lt;1%
+</code></pre>
+
+<p>| 技术类型 | 方法原理 | 精度水平 | 适用场景 | 计算成本 |</p>
 <table>
 <thead>
 <tr>
@@ -298,38 +557,72 @@ Tesla影子模式创新：
 <th>方法原理</th>
 <th>精度水平</th>
 <th>适用场景</th>
+<th>计算成本</th>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><strong>2D-3D Lifting</strong></td>
+<td>单目深度估计+相机模型</td>
+<td>70-80%</td>
+<td>简单场景</td>
+<td>低</td>
+</tr>
 <tr>
 <td><strong>时序传播</strong></td>
 <td>在关键帧人工标注，其他帧自动传播</td>
 <td>90-95%</td>
 <td>静态/低速场景</td>
+<td>低</td>
 </tr>
 <tr>
 <td><strong>模型预标注</strong></td>
 <td>用大模型预测，人工修正</td>
 <td>85-90%</td>
 <td>常规场景</td>
+<td>中</td>
 </tr>
 <tr>
 <td><strong>多视图一致性</strong></td>
 <td>利用多相机几何约束</td>
 <td>95%+</td>
 <td>3D框标注</td>
+<td>中</td>
 </tr>
 <tr>
 <td><strong>激光雷达投影</strong></td>
 <td>LiDAR点云反投影到图像</td>
 <td>98%+</td>
 <td>有LiDAR的场景</td>
+<td>低</td>
 </tr>
 <tr>
 <td><strong>离线SLAM重建</strong></td>
 <td>多帧联合优化获得精确3D</td>
 <td>99%+</td>
 <td>静态场景地图</td>
+<td>高</td>
+</tr>
+<tr>
+<td><strong>NeRF重建</strong></td>
+<td>神经辐射场隐式建模</td>
+<td>97%+</td>
+<td>复杂场景</td>
+<td>极高</td>
+</tr>
+<tr>
+<td><strong>扩散模型生成</strong></td>
+<td>条件生成缺失标注</td>
+<td>93%+</td>
+<td>罕见场景</td>
+<td>高</td>
+</tr>
+<tr>
+<td><strong>VLM零样本</strong></td>
+<td>视觉语言模型理解</td>
+<td>90%+</td>
+<td>新类别标注</td>
+<td>中</td>
 </tr>
 </tbody>
 </table>

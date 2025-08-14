@@ -198,6 +198,90 @@
                     </div>
                 
                     <div class="tree-item " >
+                        <a href="chapter22.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第22章：百度Apollo - 从开放平台到商业化落地</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter23.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第23章：小鹏汽车 - 从NGP到XNGP的全栈自研之路</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter24.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第24章：华为车BU - ADS算法架构深度剖析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter25.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第25章：地平线 - 芯片算法协同设计的典范</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter26.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第26章：大疆车载 - 极致成本控制下的算法创新</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter27.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第27章：Momenta - 量产与L4双线并进</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter28.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第28章：新势力与传统车企 - 中国自动驾驶的多元化探索</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter29.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第29章：L4公司转型之路</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter30.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第30章：ADAS专业供应商 - 本土化破局与差异化生存</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter31.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第31章：算法与芯片协同演进</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter32.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第32章：大模型与世界模型</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter33.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第33章：自动驾驶的终局思考</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
                         <a href="CLAUDE.html" class="tree-link">
                             <span class="tree-icon">📄</span>
                             <span class="tree-title">Untitled</span>
@@ -222,15 +306,45 @@
 │  问题1: 多相机融合困难                     │
 │  • 不同视角特征难以对齐                   │
 │  • 重叠区域处理复杂                       │
+│  • 坐标系转换误差累积                    │
 │                                          │
 │  问题2: 后续模块接口不友好                 │
 │  • 规划需要俯视图                        │
 │  • 预测需要全局视野                      │
+│  • 控制需要车体坐标系                    │
 │                                          │
 │  问题3: 遮挡处理困难                      │
 │  • 深度估计不准                          │
 │  • 空间关系模糊                          │
+│  • 尺度变化剧烈                        │
+│                                          │
+│  问题4: 计算冗余                         │
+│  • 每个相机独立处理                      │
+│  • 重复特征提取                         │
+│  • 后处理NMS复杂                        │
 └─────────────────────────────────────────┘
+</code></pre>
+
+<h4 id="_3">前视图方法的历史演进</h4>
+<pre class="codehilite"><code>2016-2020 前视图感知演进:
+
+2016: YOLO/SSD单目检测
+      ↓
+2017: 伪3D (Pseudo-3D)
+      • 2D框 + 深度估计
+      • MonoDepth单目深度
+      ↓
+2018: 多视图几何方法
+      • Multi-View Stereo
+      • 极线约束融合
+      ↓
+2019: Pseudo-LiDAR
+      • 深度图转点云
+      • 3D检测器处理
+      ↓
+2020: FCOS3D/SMOKE
+      • 直接3D回归
+      • 但仍是前视图
 </code></pre>
 
 <h4 id="bev">BEV统一表征的优势</h4>
@@ -250,6 +364,45 @@
      │   便于多任务学习          │
      │   自然的融合接口          │
      └──────────────────────────┘
+
+具体优势分析:
+
+1. 几何一致性
+   • 物体尺度不变
+   • 距离度量准确
+   • 空间关系清晰
+
+2. 多传感器统一
+   • Camera/LiDAR/Radar同一空间
+   • 早期融合成为可能
+   • 互补信息充分利用
+
+3. 下游任务友好
+   • 直接用于路径规划
+   • 便于碰撞检测
+   • 自然的地图对齐
+</code></pre>
+
+<h4 id="bev_1">BEV在自动驾驶中的必然性分析</h4>
+<pre class="codehilite"><code>为什么BEV是必然选择？
+
+┌─────────────────────────────────────┐
+│        驾驶决策的本质需求             │
+├─────────────────────────────────────┤
+│ 1. 空间占用: 哪里能走？              │
+│ 2. 动态预测: 其他车会去哪？          │
+│ 3. 路径规划: 我该怎么走？            │
+└─────────────────────────────────────┘
+              ↓
+         全部需要俯视图！
+              ↓
+┌─────────────────────────────────────┐
+│         BEV天然满足需求              │
+├─────────────────────────────────────┤
+│ • 欧式空间，距离计算简单             │
+│ • 规划算法可直接应用                 │
+│ • 与高精地图自然对齐                 │
+└─────────────────────────────────────┘
 </code></pre>
 
 <h3 id="712-lss">7.1.2 LSS: 开创性的视角转换方法</h3>
@@ -266,7 +419,30 @@
    BEV Grid -&gt; Detection/Segmentation
 </code></pre>
 
-<h4 id="_3">关键创新点</h4>
+<h4 id="lss">LSS详细技术实现</h4>
+<pre class="codehilite"><code>Lift阶段 - 深度分布学习:
+┌──────────────────────────────────┐
+│  输入图像 I ∈ R^(H×W×3)           │
+└──────────────────────────────────┘
+            ↓ CNN
+┌──────────────────────────────────┐
+│  特征 F ∈ R^(H×W×C)               │
+└──────────────────────────────────┘
+            ↓ 
+┌──────────────────────────────────┐
+│  深度分布 D ∈ R^(H×W×D)           │
+│  D维离散深度bins                  │
+│  [dmin, dmax]均匀划分             │
+└──────────────────────────────────┘
+            ↓
+┌──────────────────────────────────┐
+│  3D点云生成:                      │
+│  P = Σ(d·softmax(D)·F)            │
+│  沿深度维度加权求和                │
+└──────────────────────────────────┘
+</code></pre>
+
+<h4 id="_4">关键创新点</h4>
 <p>| 创新点 | 技术细节 | 影响 |</p>
 <table>
 <thead>
@@ -292,41 +468,201 @@
 <td>CUDA加速的体素化</td>
 <td>实时性能</td>
 </tr>
+<tr>
+<td>外参感知</td>
+<td>相机参数显式建模</td>
+<td>泛化能力强</td>
+</tr>
 </tbody>
 </table>
+<h4 id="lss_1">LSS的数学原理</h4>
+<pre class="codehilite"><code>深度提升公式:
+给定像素(u,v)，深度d，相机内参K，外参[R|t]
+
+1. 像素到相机坐标系:
+   p_cam = K^(-1) · [u, v, 1]^T · d
+
+2. 相机到世界坐标系:
+   p_world = R^T · (p_cam - t)
+
+3. 世界到BEV网格:
+   (i, j) = discretize(p_world.x, p_world.y)
+
+4. 特征聚合:
+   BEV[i,j] += Feature[u,v] · P(d|u,v)
+</code></pre>
+
+<h4 id="lss_2">LSS性能分析</h4>
+<pre class="codehilite"><code>计算复杂度分析:
+┌──────────────────────────────┐
+│  输入尺寸: 6×224×480          │
+│  深度bins: 41                │
+│  BEV尺寸: 200×200             │
+├──────────────────────────────┤
+│  Lift: O(HWD)                │
+│  Splat: O(HWDC)              │
+│  总计算量: ~100M FLOPs        │
+│  推理时间: ~50ms (2080Ti)     │
+└──────────────────────────────┘
+</code></pre>
+
 <h3 id="713-bevdet">7.1.3 BEVDet系列: 工程化落地</h3>
 <h4 id="bevdet-2021">BEVDet (2021)架构</h4>
 <pre class="codehilite"><code>BEVDet Pipeline:
 ┌────────────┐     ┌────────────┐     ┌────────────┐
 │   Images   │ --&gt; │  Backbone  │ --&gt; │ View Trans │
 └────────────┘     └────────────┘     └────────────┘
+                         ↓                   ↓
+                   ResNet50/101        LSS-based
+
+                    + FPN             Transformation
                                              ↓
 ┌────────────┐     ┌────────────┐     ┌────────────┐
 │  3D Heads  │ &lt;-- │ BEV Encoder│ &lt;-- │  BEV Grid  │
 └────────────┘     └────────────┘     └────────────┘
+     ↓                   ↓                   ↓
+CenterPoint      2D Conv Blocks      200×200×64
+3D Detection      for encoding
+</code></pre>
+
+<h4 id="bevdet">BEVDet核心改进</h4>
+<pre class="codehilite"><code>相比LSS的优化:
+┌──────────────────────────────────────┐
+│  1. 数据增强策略                      │
+│     • 图像域: ColorJitter, Flip      │
+│     • BEV域: 旋转, 缩放              │
+│     • 3D域: GT-Paste增强             │
+├──────────────────────────────────────┤
+│  2. 多尺度特征                        │
+│     • FPN多层特征融合                │
+│     • 不同深度范围不同分辨率          │
+├──────────────────────────────────────┤
+│  3. 检测头优化                        │
+│     • CenterPoint头部                │
+│     • Heatmap + 属性回归             │
+└──────────────────────────────────────┘
 </code></pre>
 
 <h4 id="bevdet4d">BEVDet4D: 时序融合增强</h4>
-<pre class="codehilite"><code>时序融合机制:
-T-1 Frame  ────┐
-                ├──&gt; Temporal Fusion ──&gt; Enhanced BEV
-T Frame    ────┘
-                     ↑
-                Ego Motion Compensation
+<pre class="codehilite"><code>时序融合详细架构:
+┌─────────────────────────────────────┐
+│         Historical BEV               │
+│      T-1: 200×200×64                 │
+└─────────────────────────────────────┘
+              ↓
+        Ego Motion矩阵
+        [Δx, Δy, Δθ]
+              ↓
+┌─────────────────────────────────────┐
+│      Spatial Transformer             │
+│   根据自车运动warp历史BEV             │
+└─────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────┐
+│        Feature Alignment              │
+│   Aligned_BEV = Warp(BEV_t-1, M)     │
+└─────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────┐
+│         Concatenation                │
+│   [Current_BEV, Aligned_BEV]         │
+│        200×200×128                   │
+└─────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────┐
+│      Temporal Fusion Conv            │
+│    输出: Enhanced BEV 200×200×64      │
+└─────────────────────────────────────┘
 </code></pre>
 
 <h4 id="bevdepth">BEVDepth: 深度监督优化</h4>
-<ul>
-<li><strong>显式深度监督</strong>: 利用LiDAR投影的深度真值</li>
-<li><strong>深度矫正模块</strong>: Camera内外参编码</li>
-<li><strong>性能提升</strong>: NDS提升4-5个点</li>
-</ul>
+<pre class="codehilite"><code>深度监督架构:
+┌──────────────────────────────────┐
+│       LiDAR Point Cloud           │
+│     投影到相机视角生成深度GT        │
+└──────────────────────────────────┘
+              ↓
+┌──────────────────────────────────┐
+│      Depth Correction Module      │
+│  输入: Image Features + Camera    │
+│       Intrinsics/Extrinsics      │
+├──────────────────────────────────┤
+│  SE-Net结构调制深度预测:          │
+│  • 内参编码: focal, principal     │
+│  • 外参编码: rotation, height     │
+│  • 自适应调整深度分布              │
+└──────────────────────────────────┘
+              ↓
+┌──────────────────────────────────┐
+│     Depth Supervision Loss        │
+│  L_depth = BCE(D_pred, D_gt)      │
+│  只在有LiDAR覆盖区域计算           │
+└──────────────────────────────────┘
+</code></pre>
+
+<h4 id="_5">性能对比与分析</h4>
+<p>| 方法 | NDS↑ | mAP↑ | 深度监督 | 时序 | FPS |</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>NDS↑</th>
+<th>mAP↑</th>
+<th>深度监督</th>
+<th>时序</th>
+<th>FPS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LSS</td>
+<td>0.375</td>
+<td>0.298</td>
+<td>✗</td>
+<td>✗</td>
+<td>20</td>
+</tr>
+<tr>
+<td>BEVDet</td>
+<td>0.422</td>
+<td>0.349</td>
+<td>✗</td>
+<td>✗</td>
+<td>18</td>
+</tr>
+<tr>
+<td>BEVDet4D</td>
+<td>0.457</td>
+<td>0.381</td>
+<td>✗</td>
+<td>✓</td>
+<td>16</td>
+</tr>
+<tr>
+<td>BEVDepth</td>
+<td>0.475</td>
+<td>0.412</td>
+<td>✓</td>
+<td>✗</td>
+<td>15</td>
+</tr>
+<tr>
+<td>BEVDepth4D</td>
+<td>0.503</td>
+<td>0.442</td>
+<td>✓</td>
+<td>✓</td>
+<td>14</td>
+</tr>
+</tbody>
+</table>
 <h3 id="714-bevformer-transformer">7.1.4 BEVFormer: Transformer范式</h3>
-<h4 id="_4">空间交叉注意力机制</h4>
+<h4 id="_6">空间交叉注意力机制</h4>
 <pre class="codehilite"><code>BEVFormer核心设计:
 ┌─────────────────────────────────────┐
 │         BEV Queries                  │
 │     (H×W spatial positions)          │
+│      200×200 learnable queries       │
 └─────────────────────────────────────┘
               ↓
 ┌─────────────────────────────────────┐
@@ -343,24 +679,106 @@ T Frame    ────┘
 └─────────────────────────────────────┘
 </code></pre>
 
-<h4 id="_5">关键技术突破</h4>
+<h4 id="bevformer">BEVFormer详细架构解析</h4>
+<pre class="codehilite"><code>BEVFormer Layer结构:
+┌──────────────────────────────────────┐
+│          BEV Queries Q                │
+│            H×W×C                      │
+└──────────────────────────────────────┘
+                ↓
+┌──────────────────────────────────────┐
+│     Temporal Self-Attention (TSA)     │
+│  Q' = TSA(Q, Q_prev) + Q              │
+│  • Q_prev: 上一帧的BEV特征            │
+│  • Motion-aware alignment             │
+└──────────────────────────────────────┘
+                ↓
+┌──────────────────────────────────────┐
+│   Spatial Cross-Attention (SCA)       │
+│  Q'' = SCA(Q', F_multi) + Q'          │
+│  • F_multi: 多相机多尺度特征          │
+│  • Deformable sampling                │
+└──────────────────────────────────────┘
+                ↓
+┌──────────────────────────────────────┐
+│         Feed Forward Network          │
+│    Q_out = FFN(Q'') + Q''             │
+└──────────────────────────────────────┘
+</code></pre>
+
+<h4 id="3d">3D参考点生成机制</h4>
+<pre class="codehilite"><code>参考点计算流程:
+
+1. BEV网格定义
+   Grid: [-51.2m, 51.2m] × [-51.2m, 51.2m]
+   Resolution: 0.512m
+
+2. 垂直方向采样
+   Z轴: 4个高度层 [-1m, 0m, 1m, 2m]
+
+3. 3D参考点生成
+   对每个BEV位置(i,j):
+   P_ref = [(i-100)×0.512, (j-100)×0.512, z_k]
+   其中k ∈ {1,2,3,4}
+
+4. 投影到图像
+   对每个相机c:
+   p_2d = π_c(P_ref)  // 相机投影
+
+5. 特征采样
+   使用Deformable Attention
+   在p_2d周围采样K个点
+</code></pre>
+
+<h4 id="_7">关键技术突破</h4>
 <ol>
-<li>
-<p><strong>可学习的3D空间先验</strong>
-   - BEV Query初始化包含空间位置信息
-   - 3D参考点自适应调整</p>
-</li>
-<li>
-<p><strong>多相机特征聚合</strong>
-   - Deformable Attention高效采样
-   - 避免密集的3D-&gt;2D投影</p>
-</li>
-<li>
-<p><strong>时序信息利用</strong>
-   - 历史BEV特征循环利用
-   - 自车运动补偿对齐</p>
-</li>
+<li><strong>可学习的3D空间先验</strong></li>
 </ol>
+<pre class="codehilite"><code>BEV Query初始化:
+• 位置编码: PE(x,y) = sin/cos encoding
+• 可学习embedding: 随机初始化
+• 组合: Q = PE + Learnable_Emb
+</code></pre>
+
+<ol start="2">
+<li><strong>多相机特征聚合</strong></li>
+</ol>
+<pre class="codehilite"><code>Deformable Cross-Attention:
+输入: Query q, 参考点p_ref
+
+1. 计算采样偏移: Δp = MLP(q)
+2. 采样位置: p_sample = p_ref + Δp
+3. 双线性插值: F_sampled = bilinear(F, p_sample)
+4. 加权聚合: output = Σ(w_i × F_sampled_i)
+</code></pre>
+
+<ol start="3">
+<li><strong>时序信息利用</strong></li>
+</ol>
+<pre class="codehilite"><code>时序对齐机制:
+
+1. 获取ego motion: T = [R|t]
+2. Warp历史BEV: BEV_prev_aligned = warp(BEV_prev, T)
+3. Self-attention融合当前和历史
+</code></pre>
+
+<h4 id="bevformer_1">BEVFormer性能优化技巧</h4>
+<pre class="codehilite"><code>工程优化策略:
+┌──────────────────────────────────┐
+│  1. 稀疏化处理                    │
+│     • 只处理有效相机视野内的query  │
+│     • Mask掉无效区域              │
+├──────────────────────────────────┤
+│  2. 多尺度特征                    │
+│     • 使用FPN的P2-P5层            │
+│     • 不同尺度处理不同距离        │
+├──────────────────────────────────┤
+│  3. 缓存优化                      │
+│     • 缓存历史BEV特征             │
+│     • 避免重复计算                │
+└──────────────────────────────────┘
+</code></pre>
+
 <h3 id="715-bev">7.1.5 工业界BEV实践</h3>
 <h4 id="teslabevtransformer-2021-ai-day">Tesla的BEV+Transformer架构 (2021 AI Day)</h4>
 <pre class="codehilite"><code>Tesla BEV架构:
@@ -387,7 +805,7 @@ T Frame    ────┘
     └──────────────────────────┘
 </code></pre>
 
-<h4 id="bev_1">国内厂商BEV方案对比</h4>
+<h4 id="bev_2">国内厂商BEV方案对比</h4>
 <p>| 厂商 | 方案特点 | 感知范围 | 特色技术 |</p>
 <table>
 <thead>
@@ -426,7 +844,7 @@ T Frame    ────┘
 </tbody>
 </table>
 <h3 id="716-bev">7.1.6 BEV感知的挑战与优化</h3>
-<h4 id="_6">计算效率优化</h4>
+<h4 id="_8">计算效率优化</h4>
 <pre class="codehilite"><code>优化策略:
 
 1. 稀疏化处理
@@ -443,7 +861,7 @@ T Frame    ────┘
    • 专用NPU设计
 </code></pre>
 
-<h4 id="_7">数据与标注挑战</h4>
+<h4 id="_9">数据与标注挑战</h4>
 <ol>
 <li>
 <p><strong>3D标注成本高</strong>
@@ -463,7 +881,7 @@ T Frame    ────┘
 </ol>
 <h2 id="72">7.2 占据网络与世界模型</h2>
 <h3 id="721-3d">7.2.1 从3D框到占据网络的进化</h3>
-<h4 id="3d">3D检测框的局限性</h4>
+<h4 id="3d_1">3D检测框的局限性</h4>
 <pre class="codehilite"><code>传统3D Box表示的问题:
 ┌─────────────────────────────────┐
 │  3D Bounding Box局限:            │
@@ -481,7 +899,7 @@ T Frame    ────┘
 └─────────────────────────────────┘
 </code></pre>
 
-<h4 id="_8">占据网络的概念与优势</h4>
+<h4 id="_10">占据网络的概念与优势</h4>
 <pre class="codehilite"><code>Occupancy表示:
       3D Voxel Grid
     ┌───┬───┬───┬───┐
@@ -528,7 +946,7 @@ T Frame    ────┘
 └──────────────────────────────────┘
 </code></pre>
 
-<h4 id="_9">关键技术特点</h4>
+<h4 id="_11">关键技术特点</h4>
 <ol>
 <li>
 <p><strong>高分辨率体素网格</strong>
@@ -548,7 +966,7 @@ T Frame    ────┘
 </li>
 </ol>
 <h3 id="723">7.2.3 国内占据网络实践</h3>
-<h4 id="_10">各厂商方案对比</h4>
+<h4 id="_12">各厂商方案对比</h4>
 <p>| 公司 | 产品名称 | 分辨率 | 语义类别 | 特色 |</p>
 <table>
 <thead>
@@ -591,7 +1009,7 @@ T Frame    ────┘
 </tr>
 </tbody>
 </table>
-<h4 id="_11">技术实现差异</h4>
+<h4 id="_13">技术实现差异</h4>
 <pre class="codehilite"><code>实现路径对比:
 
 纯视觉路线 (小鹏/特斯拉):
@@ -611,7 +1029,7 @@ Camera + LiDAR -&gt; Occupancy
 </code></pre>
 
 <h3 id="724-occupancy-flow">7.2.4 占据流(Occupancy Flow)</h3>
-<h4 id="_12">动态占据预测</h4>
+<h4 id="_14">动态占据预测</h4>
 <pre class="codehilite"><code>Occupancy Flow表示:
 T=0          T=1          T=2
 ┌───┐        ┌───┐        ┌───┐
@@ -622,7 +1040,7 @@ Static +    Motion     Predicted
 Dynamic     Vectors    Future State
 </code></pre>
 
-<h4 id="_13">应用场景</h4>
+<h4 id="_15">应用场景</h4>
 <ol>
 <li>
 <p><strong>轨迹预测增强</strong>
@@ -654,7 +1072,7 @@ Dynamic     Vectors    Future State
 └─────────────────────────┘
 </code></pre>
 
-<h4 id="_14">神经渲染优势</h4>
+<h4 id="_16">神经渲染优势</h4>
 <ol>
 <li>
 <p><strong>连续空间表示</strong>
@@ -673,7 +1091,7 @@ Dynamic     Vectors    Future State
 </li>
 </ol>
 <h3 id="726">7.2.6 世界模型与占据网络的融合</h3>
-<h4 id="_15">世界模型概念</h4>
+<h4 id="_17">世界模型概念</h4>
 <pre class="codehilite"><code>世界模型架构:
 ┌──────────────────────────────┐
 │     Perception Module         │
@@ -693,13 +1111,13 @@ Dynamic     Vectors    Future State
 └──────────────────────────────┘
 </code></pre>
 
-<h4 id="_16">占据作为世界模型的状态表示</h4>
+<h4 id="_18">占据作为世界模型的状态表示</h4>
 <ol>
 <li><strong>完整性</strong>: 包含所有空间信息</li>
 <li><strong>通用性</strong>: 不依赖特定物体类别</li>
 <li><strong>可预测性</strong>: 便于物理建模</li>
 </ol>
-<h4 id="_17">应用实例</h4>
+<h4 id="_19">应用实例</h4>
 <pre class="codehilite"><code>基于占据的世界模型应用:
 
 1. 场景补全
@@ -717,7 +1135,7 @@ Dynamic     Vectors    Future State
 
 <h2 id="73-4d">7.3 4D时序感知与预测</h2>
 <h3 id="731-3d4d">7.3.1 从3D到4D的必要性</h3>
-<h4 id="_18">静态感知的局限</h4>
+<h4 id="_20">静态感知的局限</h4>
 <pre class="codehilite"><code>3D静态感知问题:
 ┌────────────────────────────┐
 │   单帧感知局限:             │
@@ -758,7 +1176,7 @@ T-1 ─&gt; BEV ─┼─&gt; Temporal BEV -&gt; Output
 T   ─&gt; BEV ─┘
 </code></pre>
 
-<h4 id="bev_2">BEV空间的时序对齐</h4>
+<h4 id="bev_3">BEV空间的时序对齐</h4>
 <pre class="codehilite"><code class="language-python">时序对齐流程:
 
 1. 自车运动补偿
@@ -792,7 +1210,7 @@ T   ─&gt; BEV ─┘
 └──────────────────────────────┘
 </code></pre>
 
-<h4 id="_19">关键创新</h4>
+<h4 id="_21">关键创新</h4>
 <ol>
 <li>
 <p><strong>查询传播机制</strong>
@@ -806,7 +1224,7 @@ T   ─&gt; BEV ─┘
 </li>
 </ol>
 <h3 id="734-4d">7.3.4 4D占据预测</h3>
-<h4 id="_20">时空占据表示</h4>
+<h4 id="_22">时空占据表示</h4>
 <pre class="codehilite"><code>4D Occupancy Grid:
      Time →
    T=0   T=1   T=2
@@ -821,7 +1239,7 @@ Z  │██│  │█░│  │░░│  &lt;- 物体运动
 ━━: Unknown
 </code></pre>
 
-<h4 id="_21">预测网络架构</h4>
+<h4 id="_23">预测网络架构</h4>
 <pre class="codehilite"><code>4D预测架构:
 ┌────────────────────────────────┐
 │   Historical 3D Occupancy      │
@@ -840,7 +1258,7 @@ Z  │██│  │█░│  │░░│  &lt;- 物体运动
 </code></pre>
 
 <h3 id="735">7.3.5 运动预测与行为理解</h3>
-<h4 id="_22">基于占据流的轨迹预测</h4>
+<h4 id="_24">基于占据流的轨迹预测</h4>
 <pre class="codehilite"><code>轨迹预测流程:
 
 1. 历史占据序列提取
@@ -856,7 +1274,7 @@ Z  │██│  │█░│  │░░│  &lt;- 物体运动
    Valid_traj = check_collision(Trajectories, Occ_future)
 </code></pre>
 
-<h4 id="_23">交互行为建模</h4>
+<h4 id="_25">交互行为建模</h4>
 <pre class="codehilite"><code>多智能体交互:
 ┌─────────────────────────────┐
 │   Agent A Occupancy Flow    │
@@ -883,7 +1301,7 @@ Z  │██│  │█░│  │░░│  &lt;- 物体运动
    - 时序一致性约束</p>
 </li>
 </ol>
-<h4 id="_24">国内厂商方案</h4>
+<h4 id="_26">国内厂商方案</h4>
 <p>| 厂商 | 时序长度 | 融合方式 | 特色 |</p>
 <table>
 <thead>
@@ -916,7 +1334,7 @@ Z  │██│  │█░│  │░░│  &lt;- 物体运动
 </tbody>
 </table>
 <h3 id="737">7.3.7 挑战与未来方向</h3>
-<h4 id="_25">当前挑战</h4>
+<h4 id="_27">当前挑战</h4>
 <ol>
 <li>
 <p><strong>计算复杂度</strong>
@@ -934,7 +1352,7 @@ Z  │██│  │█░│  │░░│  &lt;- 物体运动
    - 帧率自适应</p>
 </li>
 </ol>
-<h4 id="_26">发展趋势</h4>
+<h4 id="_28">发展趋势</h4>
 <pre class="codehilite"><code>未来技术方向:
 ┌──────────────────────────────┐
 │   1. 稀疏4D表示              │
@@ -953,7 +1371,7 @@ Z  │██│  │█░│  │░░│  &lt;- 物体运动
 └──────────────────────────────┘
 </code></pre>
 
-<h2 id="_27">本章小结</h2>
+<h2 id="_29">本章小结</h2>
 <p>BEV感知革命标志着自动驾驶感知从"看得见"到"看得懂"的关键转变。通过统一的BEV空间表征，多相机感知的融合难题得到解决。占据网络进一步将感知从"检测已知物体"提升到"理解整个空间"，为真正的自主驾驶奠定基础。4D时序感知则增加了时间维度的理解，使系统能够预测和规划。</p>
 <p>这场技术革命仍在继续，随着计算能力提升和算法优化，我们正在接近人类驾驶员的空间感知和预测能力。下一章将探讨这些感知能力如何与规划算法结合，实现从感知到决策的智能飞跃。</p>
             </article>

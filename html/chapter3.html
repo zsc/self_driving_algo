@@ -198,6 +198,90 @@
                     </div>
                 
                     <div class="tree-item " >
+                        <a href="chapter22.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第22章：百度Apollo - 从开放平台到商业化落地</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter23.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第23章：小鹏汽车 - 从NGP到XNGP的全栈自研之路</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter24.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第24章：华为车BU - ADS算法架构深度剖析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter25.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第25章：地平线 - 芯片算法协同设计的典范</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter26.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第26章：大疆车载 - 极致成本控制下的算法创新</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter27.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第27章：Momenta - 量产与L4双线并进</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter28.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第28章：新势力与传统车企 - 中国自动驾驶的多元化探索</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter29.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第29章：L4公司转型之路</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter30.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第30章：ADAS专业供应商 - 本土化破局与差异化生存</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter31.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第31章：算法与芯片协同演进</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter32.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第32章：大模型与世界模型</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter33.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第33章：自动驾驶的终局思考</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
                         <a href="CLAUDE.html" class="tree-link">
                             <span class="tree-icon">📄</span>
                             <span class="tree-title">Untitled</span>
@@ -231,6 +315,111 @@
 └─────────────────────────────────────────┘
 </code></pre>
 
+<p><strong>芯片设计哲学</strong>：</p>
+<p>特斯拉FSD芯片的设计完全围绕神经网络推理优化，与通用GPU方案形成鲜明对比：</p>
+<ol>
+<li>
+<p><strong>专用神经网络加速器（NNA）设计</strong>：
+   - 96×96 MAC阵列，专门优化卷积运算
+   - 支持INT8/FP16混合精度计算
+   - 片上SRAM达32MB，减少DRAM访问
+   - 硬件级别的批归一化（BN）和激活函数支持</p>
+</li>
+<li>
+<p><strong>冗余安全设计</strong>：</p>
+</li>
+</ol>
+<pre class="codehilite"><code>双芯片冗余架构：
+┌──────────┐     ┌──────────┐
+│  SoC A   │&lt;---&gt;│  SoC B   │
+│  72 TOPS │     │  72 TOPS │
+└──────────┘     └──────────┘
+     ↓               ↓
+独立推理结果    独立推理结果
+     ↓               ↓
+┌─────────────────────────┐
+│    结果比对与仲裁器      │
+└─────────────────────────┘
+</code></pre>
+
+<ul>
+<li>两个SoC完全独立运行相同神经网络</li>
+<li>实时比对推理结果，检测硬件故障</li>
+<li>满足ASIL-D功能安全要求</li>
+</ul>
+<ol start="3">
+<li><strong>与竞品的性能对比</strong>（2019年数据）：</li>
+</ol>
+<p>| 平台 | 算力(TOPS) | 功耗(W) | 能效比(TOPS/W) | 成本($) |</p>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>算力(TOPS)</th>
+<th>功耗(W)</th>
+<th>能效比(TOPS/W)</th>
+<th>成本($)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tesla FSD</td>
+<td>144</td>
+<td>72</td>
+<td>2.0</td>
+<td>190</td>
+</tr>
+<tr>
+<td>NVIDIA Xavier</td>
+<td>30</td>
+<td>30</td>
+<td>1.0</td>
+<td>350</td>
+</tr>
+<tr>
+<td>MobileEye EyeQ4</td>
+<td>2.5</td>
+<td>3</td>
+<td>0.83</td>
+<td>100</td>
+</tr>
+<tr>
+<td>地平线征程2</td>
+<td>4</td>
+<td>2</td>
+<td>2.0</td>
+<td>50</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键技术创新</strong>：</p>
+<ol>
+<li>
+<p><strong>定制指令集架构（ISA）</strong>：
+   - 为神经网络运算定制的SIMD指令
+   - 支持稀疏张量运算，提升实际吞吐量
+   - 零拷贝DMA传输机制</p>
+</li>
+<li>
+<p><strong>内存层次优化</strong>：</p>
+</li>
+</ol>
+<pre class="codehilite"><code>内存层次结构：
+L1 Cache (每个CPU核心) : 32KB
+        ↓
+L2 Cache (共享) : 2MB  
+        ↓
+片上SRAM : 32MB (NNA专用)
+        ↓
+LPDDR4 : 8GB (68GB/s带宽)
+</code></pre>
+
+<ol start="3">
+<li><strong>编译器与软件栈</strong>：
+   - PyTorch → ONNX → Tesla编译器
+   - 自动算子融合和图优化
+   - 支持动态批处理和多流并发</li>
+</ol>
 <h3 id="312">3.1.2 神经网络架构创新</h3>
 <p>特斯拉展示的神经网络架构相比之前有了质的飞跃：</p>
 <p><strong>HydraNet多头网络架构</strong></p>
@@ -250,6 +439,119 @@
 <li><strong>多任务学习</strong>：单个网络同时处理检测、分割、深度估计等多个任务</li>
 <li><strong>时序融合</strong>：引入时间维度，利用视频连续帧提升检测稳定性</li>
 </ul>
+<p><strong>RegNet骨干网络的选择</strong>：</p>
+<p>特斯拉选择RegNet而非流行的ResNet/EfficientNet有深层考虑：</p>
+<ol>
+<li><strong>网络设计空间探索</strong>：</li>
+</ol>
+<pre class="codehilite"><code>RegNet设计原则：
+宽度: w = 48 * (2.0)^i  (通道数递增)
+深度: d = [2, 5, 12, 4] (每阶段块数)
+组宽: g = 24           (分组卷积)
+
+优势：
+• 参数效率提升40%
+• 推理速度提升30%
+• 硬件友好的规整结构
+</code></pre>
+
+<ol start="2">
+<li><strong>多尺度特征提取优化</strong>：</li>
+</ol>
+<pre class="codehilite"><code>特征金字塔输出：
+Stage 1: 320×240×64   (1/4分辨率)
+Stage 2: 160×120×128  (1/8分辨率)  
+Stage 3: 80×60×256    (1/16分辨率)
+Stage 4: 40×30×512    (1/32分辨率)
+Stage 5: 20×15×1024   (1/64分辨率)
+</code></pre>
+
+<ol start="3">
+<li><strong>任务头设计细节</strong>：</li>
+</ol>
+<p>| 任务头 | 输入特征 | 网络结构 | 输出规格 | 推理耗时 |</p>
+<table>
+<thead>
+<tr>
+<th>任务头</th>
+<th>输入特征</th>
+<th>网络结构</th>
+<th>输出规格</th>
+<th>推理耗时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>物体检测</td>
+<td>Stage 3-5</td>
+<td>FPN+3×3 Conv</td>
+<td>100×75×(C+5)</td>
+<td>2.1ms</td>
+</tr>
+<tr>
+<td>车道线</td>
+<td>Stage 2-4</td>
+<td>U-Net decoder</td>
+<td>160×120×3</td>
+<td>1.8ms</td>
+</tr>
+<tr>
+<td>可行驶区域</td>
+<td>Stage 2-3</td>
+<td>FCN</td>
+<td>80×60×2</td>
+<td>1.2ms</td>
+</tr>
+<tr>
+<td>交通标志</td>
+<td>Stage 4-5</td>
+<td>RoI Align</td>
+<td>50类分类</td>
+<td>0.9ms</td>
+</tr>
+<tr>
+<td>深度估计</td>
+<td>Stage 2-5</td>
+<td>Encoder-Decoder</td>
+<td>160×120×1</td>
+<td>2.5ms</td>
+</tr>
+</tbody>
+</table>
+<p><strong>时序信息融合机制</strong>：</p>
+<p>特斯拉在2019年引入的时序融合是关键突破：</p>
+<pre class="codehilite"><code>时序特征聚合：
+t-3  t-2  t-1   t
+ ↓    ↓    ↓    ↓
+特征  特征  特征  特征
+ ↓    ↓    ↓    ↓
+[特征对齐模块]←─ 自车运动补偿
+      ↓
+[时序注意力机制]
+      ↓
+  融合特征
+</code></pre>
+
+<ol>
+<li>
+<p><strong>特征对齐</strong>：
+   - 使用IMU和轮速计进行自车运动补偿
+   - 光流估计进行像素级对齐
+   - 可变形卷积适应物体形变</p>
+</li>
+<li>
+<p><strong>时序建模</strong>：
+   - ConvLSTM捕获时序依赖
+   - 时序注意力权重学习
+   - 关键帧选择机制（减少冗余）</p>
+</li>
+<li>
+<p><strong>性能提升</strong>：
+   - 检测稳定性提升35%
+   - 遮挡物体召回率提升50%
+   - 假阳性率降低40%</p>
+</li>
+</ol>
 <h3 id="313-shadow-mode">3.1.3 数据引擎与Shadow Mode</h3>
 <p>特斯拉首次详细介绍了其"影子模式"（Shadow Mode）数据收集系统：</p>
 <ol>
@@ -262,6 +564,97 @@
 <li>车队规模：超过50万辆配备FSD硬件的车辆</li>
 <li>日均里程：2000万英里</li>
 <li>月度数据量：1PB级别的视频数据</li>
+</ul>
+<p><strong>Shadow Mode工作原理详解</strong>：</p>
+<pre class="codehilite"><code>影子模式数据流：
+┌────────────────────────────────┐
+│        生产车辆                 │
+├────────────────────────────────┤
+│  主控制系统 │ 影子系统          │
+│  (AP 2.5)  │ (FSD Beta)        │
+│     ↓      │     ↓             │
+│  实际控制   │  仅推理不控制      │
+│     ↓      │     ↓             │
+│  CAN总线 ←─┴─→ 行为比对器       │
+│                   ↓             │
+│            触发条件判断          │
+│                   ↓             │
+│            数据上传队列          │
+└────────────────────────────────┘
+</code></pre>
+
+<p><strong>触发数据收集的典型场景</strong>：</p>
+<ol>
+<li>
+<p><strong>预测分歧场景</strong>：
+   - 人类驾驶员刹车，但系统未预测需要刹车
+   - 系统建议变道，但驾驶员未执行
+   - 轨迹预测与实际行驶路径偏差&gt;2米</p>
+</li>
+<li>
+<p><strong>边缘案例自动识别</strong>：</p>
+</li>
+</ol>
+<pre class="codehilite"><code>触发条件配置示例：
+{
+  &quot;hard_brake&quot;: {
+    &quot;deceleration&quot;: &quot;&gt; 5 m/s²&quot;,
+    &quot;confidence&quot;: &quot;&lt; 0.8&quot;,
+    &quot;upload_window&quot;: &quot;[-5s, +10s]&quot;
+  },
+  &quot;object_disappear&quot;: {
+    &quot;tracking_loss&quot;: &quot;true&quot;,
+    &quot;distance&quot;: &quot;&lt; 50m&quot;,
+    &quot;upload_window&quot;: &quot;[-3s, +3s]&quot;
+  },
+  &quot;unusual_behavior&quot;: {
+    &quot;trajectory_deviation&quot;: &quot;&gt; 2m&quot;,
+    &quot;steering_rate&quot;: &quot;&gt; 100°/s&quot;
+  }
+}
+</code></pre>
+
+<ol start="3">
+<li><strong>主动查询采集</strong>：
+   - OTA推送特定场景采集任务
+   - 如："收集雨天高速变道数据"
+   - 车队分布式执行，48小时内回传</li>
+</ol>
+<p><strong>自动标注系统架构</strong>：</p>
+<pre class="codehilite"><code>多视角自动标注流程：
+车辆A观测 ──┐
+车辆B观测 ──┼──→ 时空对齐 → 3D重建 → 自动标注
+车辆C观测 ──┘         ↓
+                 HD Map校准
+                      ↓
+                 标注质量评分
+                      ↓
+              人工审核(&lt; 5%)
+</code></pre>
+
+<p>关键技术：</p>
+<ol>
+<li><strong>时空配准</strong>：GPS时间戳 + 视觉SLAM</li>
+<li><strong>多视角融合</strong>：同一场景不同车辆的观测融合</li>
+<li><strong>4D标注</strong>：物体在时间维度的连续标注</li>
+<li><strong>标注传播</strong>：利用跟踪将标注传播到整个序列</li>
+</ol>
+<p><strong>数据引擎迭代循环</strong>：</p>
+<pre class="codehilite"><code>版本迭代周期（2周）：
+Day 1-3:   数据收集与清洗
+Day 4-5:   自动标注生成
+Day 6-7:   模型训练
+Day 8-9:   仿真验证
+Day 10-11: 实车测试
+Day 12-13: A/B测试
+Day 14:    OTA推送
+</code></pre>
+
+<p>特斯拉通过这套系统实现了：</p>
+<ul>
+<li>标注成本降低90%</li>
+<li>数据多样性提升10倍</li>
+<li>长尾场景覆盖率从20%提升到80%</li>
 </ul>
 <h2 id="32">3.2 多任务学习网络兴起：从单一功能到统一架构</h2>
 <h3 id="321">3.2.1 传统方案的局限性</h3>
@@ -333,6 +726,33 @@
   并行处理15+个视觉任务
 </code></pre>
 
+<p>EyeQ5的多任务调度策略：</p>
+<ol>
+<li>
+<p><strong>硬件级任务分配</strong>：
+   - CVP处理传统CV任务（光流、特征点）
+   - DLA处理深度学习任务
+   - CPU处理高层融合逻辑</p>
+</li>
+<li>
+<p><strong>任务优先级管理</strong>：</p>
+</li>
+</ol>
+<pre class="codehilite"><code>优先级队列：
+P0: 紧急制动相关 (AEB)     - 10ms响应
+P1: 车道保持 (LKA)         - 20ms响应
+P2: 目标检测与跟踪         - 33ms响应
+P3: 交通标志识别           - 100ms响应
+P4: 自由空间检测           - 100ms响应
+</code></pre>
+
+<ol start="3">
+<li><strong>性能指标</strong>（2019年测试）：
+   - 同时处理15个摄像头输入
+   - 运行40+个神经网络
+   - 系统延迟&lt;100ms
+   - 功耗&lt;10W</li>
+</ol>
 <p><strong>地平线Matrix 2.0</strong></p>
 <p>中国本土芯片厂商地平线在2019年推出的Matrix 2.0展示了高效的多任务处理：</p>
 <ul>
@@ -340,6 +760,113 @@
 <li>同时运行8个神经网络</li>
 <li>单芯片实现360°感知</li>
 </ul>
+<p>Matrix 2.0多任务架构创新：</p>
+<pre class="codehilite"><code>征程2芯片架构：
+┌────────────────────────────┐
+│   BPU (Brain Process Unit) │
+├────────────────────────────┤
+│  双核架构 @ 1GHz           │
+│  96个MAC单元               │
+│  4 TOPS INT8算力           │
+└────────────────────────────┘
+           ↓
+    高效任务调度器
+   ┌────┬────┬────┬────┐
+   │检测│分割│跟踪│测距│
+   └────┴────┴────┴────┘
+</code></pre>
+
+<p>关键优化：</p>
+<ol>
+<li><strong>模型压缩</strong>：8bit量化 + 稀疏化，模型大小减少75%</li>
+<li><strong>编译器优化</strong>：自动算子融合，减少内存访问</li>
+<li><strong>动态资源分配</strong>：根据场景复杂度调整算力分配</li>
+</ol>
+<p><strong>NVIDIA Xavier多任务方案</strong></p>
+<p>作为对比，NVIDIA的通用GPU方案展示了不同思路：</p>
+<pre class="codehilite"><code>Xavier Carmel GPU架构：
+512个CUDA核心
+     ↓
+统一计算模型
+     ↓
+┌─────────────┐
+│  TensorRT   │ - 推理优化
+│  cuDNN      │ - 深度学习库
+│  VisionWorks│ - 传统CV
+└─────────────┘
+</code></pre>
+
+<p>优势：</p>
+<ul>
+<li>灵活性高，易于开发</li>
+<li>生态完善，工具链成熟</li>
+<li>支持各种网络结构</li>
+</ul>
+<p>劣势：</p>
+<ul>
+<li>功耗较高（30W）</li>
+<li>成本高（$350+）</li>
+<li>需要主动散热</li>
+</ul>
+<h3 id="324">3.2.4 多任务学习的理论基础</h3>
+<p><strong>为什么多任务学习有效？</strong></p>
+<ol>
+<li><strong>表征共享（Representation Sharing）</strong>：</li>
+</ol>
+<pre class="codehilite"><code>信息层次：
+低层特征（边缘、纹理）── 所有任务共享
+        ↓
+中层特征（部件、形状）── 部分任务共享
+        ↓
+高层特征（语义、类别）── 任务特定
+</code></pre>
+
+<ol start="2">
+<li>
+<p><strong>归纳偏置（Inductive Bias）</strong>：
+   - 多任务约束网络学习更通用的特征
+   - 减少过拟合风险
+   - 提升泛化能力</p>
+</li>
+<li>
+<p><strong>注意力聚焦（Attention Focusing）</strong>：
+   - 不同任务关注不同特征
+   - 互补性增强鲁棒性
+   - 如：检测关注边界，分割关注内部</p>
+</li>
+</ol>
+<p><strong>多任务学习的挑战与解决</strong>：</p>
+<ol>
+<li><strong>梯度冲突问题</strong>：</li>
+</ol>
+<pre class="codehilite"><code>问题：不同任务梯度方向相反
+
+解决方案对比：
+├─ 不确定性加权：σ²加权各任务损失
+├─ 梯度归一化：GradNorm动态平衡
+├─ 帕累托优化：寻找帕累托最优解
+└─ 任务交替：动态调整任务训练频率
+</code></pre>
+
+<ol start="2">
+<li>
+<p><strong>负迁移（Negative Transfer）</strong>：
+   - 现象：联合训练性能反而下降
+   - 原因：任务相关性低或冲突
+   - 解决：任务分组、选择性共享</p>
+</li>
+<li>
+<p><strong>容量分配</strong>：</p>
+</li>
+</ol>
+<pre class="codehilite"><code>网络容量分配策略：
+共享层：70% 参数
+任务特定层：30% 参数
+   ├─ 检测：12%
+   ├─ 分割：10%
+   └─ 其他：8%
+</code></pre>
+
 <h2 id="33-3d">3.3 伪激光雷达与深度估计：纯视觉3D感知的突破</h2>
 <h3 id="331-pseudo-lidar">3.3.1 伪激光雷达（Pseudo-LiDAR）概念</h3>
 <p>2019年康奈尔大学提出的Pseudo-LiDAR论文引发了业界对纯视觉3D感知的重新思考：</p>

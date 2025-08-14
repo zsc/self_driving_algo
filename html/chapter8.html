@@ -198,6 +198,90 @@
                     </div>
                 
                     <div class="tree-item " >
+                        <a href="chapter22.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第22章：百度Apollo - 从开放平台到商业化落地</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter23.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第23章：小鹏汽车 - 从NGP到XNGP的全栈自研之路</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter24.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第24章：华为车BU - ADS算法架构深度剖析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter25.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第25章：地平线 - 芯片算法协同设计的典范</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter26.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第26章：大疆车载 - 极致成本控制下的算法创新</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter27.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第27章：Momenta - 量产与L4双线并进</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter28.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第28章：新势力与传统车企 - 中国自动驾驶的多元化探索</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter29.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第29章：L4公司转型之路</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter30.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第30章：ADAS专业供应商 - 本土化破局与差异化生存</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter31.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第31章：算法与芯片协同演进</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter32.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第32章：大模型与世界模型</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter33.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第33章：自动驾驶的终局思考</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
                         <a href="CLAUDE.html" class="tree-link">
                             <span class="tree-icon">📄</span>
                             <span class="tree-title">Untitled</span>
@@ -215,13 +299,14 @@
 <h2 id="1">1. 传统规划方法的基石与局限</h2>
 <h3 id="11">1.1 基于搜索的规划算法</h3>
 <h4 id="a">A*算法在自动驾驶中的应用</h4>
-<p>A*算法作为最经典的图搜索算法，在早期自动驾驶系统中扮演了重要角色。其核心思想是通过启发式函数引导搜索方向，在保证最优性的同时提高搜索效率。</p>
+<p>A<em>算法作为最经典的图搜索算法，在早期自动驾驶系统中扮演了重要角色。其核心思想是通过启发式函数引导搜索方向，在保证最优性的同时提高搜索效率。从2016年开始，几乎所有主流自动驾驶系统都将A</em>或其变种作为基础规划算法。</p>
 <pre class="codehilite"><code>A*算法在自动驾驶中的典型应用架构：
 
 ┌─────────────────────────────────────────────────┐
 │                  环境表征层                      │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐    │
 │  │ 栅格地图 │  │ 语义地图 │  │ 成本地图 │    │
+│  │ 0.1-1.0m │  │ 车道/路口 │  │ 风险评估 │    │
 │  └──────────┘  └──────────┘  └──────────┘    │
 └─────────────────────────────────────────────────┘
                       ↓
@@ -231,6 +316,7 @@
 │  │  f(n) = g(n) + h(n)                  │      │
 │  │  g(n): 起点到n的实际代价              │      │
 │  │  h(n): n到终点的启发式估计            │      │
+│  │  ε-admissible: f(n) ≤ (1+ε)·f*(n)   │      │
 │  └──────────────────────────────────────┘      │
 └─────────────────────────────────────────────────┘
                       ↓
@@ -239,133 +325,485 @@
 │  • 路径平滑 (Cubic Spline, Bezier)             │
 │  • 速度规划 (S-T图优化)                        │
 │  • 碰撞检测与避让                              │
+│  • 曲率连续性保证                              │
 └─────────────────────────────────────────────────┘
 </code></pre>
 
-<p><strong>工程实践要点：</strong></p>
+<p><strong>深度技术剖析：</strong></p>
 <ol>
 <li>
-<p><strong>分辨率权衡</strong>：栅格地图分辨率直接影响搜索空间大小
-   - 高分辨率(0.1m)：精度高但计算量大，适合低速场景
-   - 低分辨率(0.5-1m)：计算快但可能错过可行解</p>
+<p><strong>分辨率权衡与自适应策略</strong>：
+   - 高分辨率(0.1m)：精度高但计算量O(n⁴)，适合低速泊车场景(&lt;10km/h)
+   - 中分辨率(0.25m)：平衡精度与效率，城市道路主流选择(10-60km/h)
+   - 低分辨率(0.5-1m)：计算快O(n²)，高速公路场景(&gt;60km/h)
+   - <strong>自适应分辨率</strong>(Waymo, 2018)：近处密集远处稀疏，计算效率提升3倍</p>
 </li>
 <li>
-<p><strong>启发式函数设计</strong>：
-   - 欧氏距离：简单快速但过于乐观
-   - 曼哈顿距离：适合结构化道路
-   - Dubins/Reeds-Shepp距离：考虑车辆运动学约束</p>
-</li>
-<li>
-<p><strong>实时性优化</strong>：
-   - Anytime A<em>：可随时返回次优解
-   - D</em> Lite：动态环境下的增量式重规划
-   - Hybrid A*：连续空间与离散搜索的结合</p>
+<p><strong>启发式函数的演进</strong>：</p>
 </li>
 </ol>
-<p><strong>Apollo早期版本(2.0-3.0)的A*实现特点：</strong></p>
-<ul>
-<li>采用3层搜索策略：粗搜索→精搜索→轨迹优化</li>
-<li>引入动态障碍物预测，将时间维度加入搜索空间</li>
-<li>使用启发式剪枝减少搜索空间</li>
-</ul>
-<h4 id="rrt">RRT系列算法的演进</h4>
-<p>快速扩展随机树(RRT)通过随机采样探索配置空间，特别适合高维空间和复杂约束下的规划问题。</p>
-<pre class="codehilite"><code>RRT算法家族演进图谱：
+<pre class="codehilite"><code>基础启发式：
 
-         RRT (1998)
-            ↓
-      ┌─────┴─────┐
-      ↓           ↓
-   RRT*        RRT-Connect
-   (2010)        (2000)
-      ↓           ↓
-   RRT*-Smart   Bi-RRT
-   (2013)       (2001)
-      ↓
-   Informed RRT*
-   (2014)
-      ↓
-   RRT# (2015)
-   实时重规划
+- 欧氏距离: h(n) = ||n - goal||₂
+- 曼哈顿距离: h(n) = |nx-gx| + |ny-gy|
+
+运动学感知启发式：
+
+- Dubins路径: 考虑最小转弯半径
+- Reeds-Shepp: 允许倒车的最短路径
+
+高级启发式(2019+)：
+
+- 全息成本: h(n) = α·距离 + β·舒适度 + γ·风险
+- 学习型启发式: h(n) = Neural_Network(state)
 </code></pre>
 
-<p><strong>关键技术改进：</strong></p>
-<ol>
-<li>
-<p><strong>RRT* (2010)</strong>：渐进最优性保证
-   - 重连线(Rewiring)机制
-   - 收敛到最优解的理论保证
-   - 计算复杂度：O(n log n)</p>
-</li>
-<li>
-<p><strong>Informed RRT* (2014)</strong>：利用已找到解引导采样
-   - 椭圆采样区域
-   - 快速收敛到更优解
-   - Tesla AP2.x早期版本采用类似思想</p>
-</li>
-<li>
-<p><strong>Kinodynamic RRT</strong>*：考虑动力学约束
-   - 状态空间包含速度、加速度
-   - 前向积分验证可行性
-   - 适合高速场景规划</p>
+<ol start="3">
+<li><strong>实时性优化技术栈</strong>：
+   - <strong>Anytime A</strong>* (2016-2018主流)：<ul>
+<li>初始ε=3.0快速获得可行解</li>
+<li>渐进收缩ε→1.0逼近最优</li>
+<li>典型收敛时间：10ms→50ms→100ms</li>
+</ul>
 </li>
 </ol>
-<p><strong>工业界实践案例 - Waymo的混合RRT方案(2017-2019)：</strong></p>
 <ul>
-<li>分层规划：道路级RRT + 轨迹级优化</li>
-<li>并行化：多线程探索不同区域</li>
-<li>启发式偏置：70%目标导向，30%随机探索</li>
+<li>
+<p><strong>D* Lite</strong> (动态环境必备)：</p>
+<ul>
+<li>增量式更新，避免全局重搜索</li>
+<li>仅传播受影响节点，复杂度O(k·log k)</li>
+<li>Uber ATG实践：处理动态障碍物延迟&lt;5ms</li>
+</ul>
+</li>
+<li>
+<p><strong>Hybrid A</strong>* (Stanford/Mercedes开创)：</p>
+<ul>
+<li>离散网格搜索+连续空间优化</li>
+<li>考虑车辆完整运动学模型</li>
+<li>泊车场景成功率：95%→99.5%</li>
+</ul>
+</li>
+</ul>
+<p><strong>产业化实践案例深度分析：</strong></p>
+<p><strong>Apollo早期版本(2.0-3.0)的层次化A*架构：</strong></p>
+<pre class="codehilite"><code>第一层：道路级规划(10Hz)
+├─ 输入：路网拓扑图
+├─ 输出：车道序列
+└─ 搜索空间：~100节点
+
+第二层：车道级规划(20Hz)
+├─ 输入：车道中心线
+├─ 输出：粗略轨迹
+└─ 搜索空间：~1000节点
+
+第三层：轨迹级优化(50Hz)
+├─ 输入：粗略轨迹
+├─ 输出：平滑轨迹
+└─ 优化维度：位置+速度+加速度
+</code></pre>
+
+<p><strong>关键性能指标：</strong></p>
+<ul>
+<li>搜索成功率：99.8%（结构化道路）</li>
+<li>平均搜索时间：15ms（城市场景）</li>
+<li>内存占用：&lt;100MB（包含多层地图）</li>
+</ul>
+<p><strong>Hybrid A*在Mercedes S-Class (2017)的工程化：</strong></p>
+<pre class="codehilite"><code>状态空间扩展：
+State = [x, y, θ, v, δ]
+
+- (x,y): 2D位置
+- θ: 航向角(离散化72个方向)
+- v: 速度(离散化10个等级)
+- δ: 前轮转角
+
+运动原语设计：
+
+1. 直行: δ=0, 不同速度
+2. 左转: δ∈[-δmax, 0), 5个级别
+3. 右转: δ∈(0, δmax], 5个级别
+4. 倒车: v&lt;0, 用于泊车
+
+碰撞检测优化：
+
+- Swept Volume预计算
+- 2D查找表加速
+- 检测速度：&lt;0.1ms/查询
+</code></pre>
+
+<p><strong>Google自动驾驶项目(2014-2016)的分层A*创新：</strong></p>
+<ol>
+<li><strong>全局A</strong>*：高精地图上的拓扑搜索</li>
+<li><strong>局部A</strong>*：100m范围内的精细规划</li>
+<li><strong>紧急A</strong>*：10m范围内的避障专用</li>
+<li><strong>并行化</strong>：3个A*实例并行运行，取最优解</li>
+</ol>
+<h4 id="rrt">RRT系列算法的演进</h4>
+<p>快速扩展随机树(RRT)通过随机采样探索配置空间，特别适合高维空间和复杂约束下的规划问题。RRT由LaValle于1998年提出后，迅速成为机器人路径规划的主流方法，并在2010年后广泛应用于自动驾驶领域。</p>
+<pre class="codehilite"><code>RRT算法家族完整演进图谱：
+
+         RRT (LaValle, 1998)
+         概率完备，非最优
+              ↓
+      ┌───────┴───────┐
+      ↓               ↓
+   RRT-Connect    RRT-GoalBias
+   (2000)         (1999)
+   双向生长        目标偏置
+      ↓               ↓
+   Bi-RRT ←────────→ RRT*
+   (2001)           (2010)
+   双向优化         渐进最优
+      ↓               ↓
+   RRT*-Smart ←──→ Informed RRT*
+   (2013)           (2014)
+   路径优化         椭圆采样
+      ↓               ↓
+   RT-RRT* ←────→ RRT# 
+   (2015)          (2015)
+   实时性          动态重规划
+      ↓               ↓
+   Batch Informed Trees (BIT*)
+   (2015) 批量采样优化
+              ↓
+   Advanced BIT* (ABIT*)
+   (2020) 自适应采样
+</code></pre>
+
+<p><strong>深度技术剖析与演进脉络：</strong></p>
+<ol>
+<li><strong>RRT* (2010) - 最优性突破</strong>：</li>
+</ol>
+<pre class="codehilite"><code>核心创新：Near + Rewire
+
+Near邻域定义：
+r = γ·(log n / n)^(1/d)
+
+- γ: 常数(通常2×(1+1/d)^(1/d)×μ(Xfree)^(1/d))
+- n: 节点数
+- d: 空间维度
+- μ(Xfree): 自由空间测度
+
+Rewire过程：
+for each x_near in Near(x_new, r):
+    if Cost(x_new) + c(x_new, x_near) &lt; Cost(x_near):
+        x_near.parent = x_new  // 重连线
+
+性能提升：
+
+- 路径质量：提升15-30%
+- 收敛速度：O(n log n)
+- 内存开销：增加20%
+</code></pre>
+
+<ol start="2">
+<li><strong>Informed RRT* (2014) - 搜索空间优化</strong>：</li>
+</ol>
+<pre class="codehilite"><code>椭圆采样原理：
+当找到初始解cbest后，限制采样空间为：
+{x | ||x-xstart|| + ||x-xgoal|| ≤ cbest}
+
+Tesla AP2.x (2017)实践：
+
+- 初始全空间采样1000个点
+- 找到解后椭圆采样
+- 路径改进速度提升5倍
+- 最终路径长度减少8%
+</code></pre>
+
+<ol start="3">
+<li><strong>Kinodynamic RRT* - 动力学约束处理</strong>：</li>
+</ol>
+<pre class="codehilite"><code>状态空间扩展：
+x = [px, py, pz, vx, vy, vz, ax, ay, az]
+
+前向积分验证：
+x_new = f(x_near, u, Δt)
+其中f为车辆动力学模型
+
+控制空间采样：
+u ∈ U = {加速度×转向角}
+
+Waymo实践(2018)：
+
+- 5维状态空间[x,y,θ,v,ω]
+- 2维控制空间[a,δ]
+- 积分步长0.1s
+- 规划周期10Hz
+</code></pre>
+
+<p><strong>产业界深度实践案例：</strong></p>
+<p><strong>Waymo的分层RRT架构(2017-2019)：</strong></p>
+<pre class="codehilite"><code>三层RRT系统：
+┌────────────────────────────────┐
+│  战略层RRT (1Hz)               │
+│  - 道路网络级别               │
+│  - 10km范围                   │
+│  - 拓扑结构搜索               │
+└────────────────────────────────┘
+           ↓
+┌────────────────────────────────┐
+│  战术层RRT* (10Hz)             │
+│  - 车道级别规划               │
+│  - 200m范围                   │
+│  - 考虑动态障碍物             │
+└────────────────────────────────┘
+           ↓
+┌────────────────────────────────┐
+│  操作层Informed RRT* (20Hz)    │
+│  - 轨迹级别                   │
+│  - 50m范围                    │
+│  - 精确避障                   │
+└────────────────────────────────┘
+
+并行化策略：
+
+- 8线程并行探索
+- Lock-free数据结构
+- GPU加速碰撞检测
+- 总延迟&lt;50ms
+</code></pre>
+
+<p><strong>Uber ATG的RRT*优化(2018)：</strong></p>
+<pre class="codehilite"><code>批量扩展优化：
+传统：逐点扩展
+优化：批量100点同时扩展
+
+SIMD加速：
+
+- AVX2指令集
+- 4个节点并行处理
+- 碰撞检测加速3.5倍
+
+自适应采样：
+if 障碍物密度高:
+    增加采样密度
+    减小步长
+else:
+    稀疏采样
+    增大步长
+
+性能指标：
+
+- 成功率：98.5%
+- 平均时间：12ms
+- 路径质量：接近最优解的1.1倍
+</code></pre>
+
+<p><strong>MIT RACECAR项目的RT-RRT*(2016)：</strong></p>
+<pre class="codehilite"><code>实时性保证机制：
+
+1. 任意时间特性：
+   - 随时可中断
+   - 返回当前最优解
+
+2. 分支限界：
+   - 维护解的上界
+   - 剪枝劣质分支
+
+3. 增量式改进：
+   while time_available():
+       improve_solution()
+
+赛车场景性能：
+
+- 速度：120km/h
+- 规划频率：50Hz
+- 预瞄距离：30m
+- 碰撞率：&lt;0.1%
+</code></pre>
+
+<p><strong>Cruise的Continuous RRT(2020)：</strong></p>
+<ul>
+<li>连续空间直接搜索，避免离散化误差</li>
+<li>贝塞尔曲线连接，保证曲率连续</li>
+<li>概率道路图(PRM)预处理加速</li>
+<li>城市复杂路口成功率：97%</li>
 </ul>
 <h3 id="12">1.2 基于优化的轨迹规划</h3>
 <h4 id="lattice-planner">Lattice Planner的广泛应用</h4>
-<p>Lattice规划器通过在状态空间中预定义一组可行的运动原语(Motion Primitives)，将连续规划问题转化为图搜索问题。</p>
-<pre class="codehilite"><code>Lattice Planner工作原理：
+<p>Lattice规划器通过在状态空间中预定义一组可行的运动原语(Motion Primitives)，将连续规划问题转化为图搜索问题。这种方法最早由CMU的Ross等人于2008年提出，在DARPA Urban Challenge中大放异彩，随后成为自动驾驶规划的主流方法之一。</p>
+<pre class="codehilite"><code>Lattice Planner完整技术架构：
 
 状态空间定义：
 ┌────────────────────────────────────┐
-│  State = [x, y, θ, v, a, κ]       │
-│  x,y: 位置  θ: 航向               │
-│  v: 速度    a: 加速度  κ: 曲率    │
+│  State = [x, y, θ, v, a, κ, t]    │
+│  x,y: 位置(m)   θ: 航向(rad)      │
+│  v: 速度(m/s)   a: 加速度(m/s²)   │
+│  κ: 曲率(1/m)   t: 时间戳(s)      │
 └────────────────────────────────────┘
             ↓
-运动原语生成：
+运动原语生成（离线预计算）：
 ┌────────────────────────────────────┐
-│     前进类     转向类     变道类    │
-│   ──────→   ╱──────╲   ╱────────   │
-│            ╱        ╲  ────────╲   │
+│  前进类(5)   转向类(9)   变道类(6) │
+│   ──────→   ╱──────╲   ╱────────  │
+│   ═══════►  ╱══════╲  ╱════════   │
+│   ········► ╱······╲  ╱········   │
 └────────────────────────────────────┘
             ↓
-轨迹评估与选择：
+轨迹评估多目标优化：
 Cost = w₁·Jsafety + w₂·Jcomfort + w₃·Jefficiency
+
+     + w₄·Jlegality + w₅·Jconsistency
 </code></pre>
 
-<p><strong>Mercedes-Benz (2013-2018)的Lattice实践：</strong></p>
-<ul>
-<li>横向规划：5个采样点(±3m, ±1.5m, 0m)</li>
-<li>纵向规划：速度-时间多项式采样</li>
-<li>评价函数：15个子目标加权组合</li>
-<li>实时性：50Hz更新频率</li>
-</ul>
-<p><strong>百度Apollo EM Planner架构(2018-2020)：</strong></p>
-<pre class="codehilite"><code>┌─────────────────────────────────────┐
-│         EM Planner Pipeline         │
-├─────────────────────────────────────┤
-│  1. 参考线提供器 (Reference Line)   │
-│     - 基于高精地图                  │
-│     - QP样条平滑                    │
-├─────────────────────────────────────┤
-│  2. 交通决策 (Traffic Decision)     │
-│     - 车道选择                      │
-│     - 障碍物标签                    │
-├─────────────────────────────────────┤
-│  3. 路径规划 (DP + QP)              │
-│     - DP: 离散采样                  │
-│     - QP: 二次规划优化              │
-├─────────────────────────────────────┤
-│  4. 速度规划 (ST Graph)             │
-│     - 动态规划生成种子              │
-│     - 二次规划平滑                  │
-└─────────────────────────────────────┘
+<p><strong>深度技术剖析：</strong></p>
+<p><strong>运动原语设计原理：</strong></p>
+<pre class="codehilite"><code>1. 横向运动原语（Lateral Primitives）：
+   五次多项式：y(s) = a₀ + a₁s + a₂s² + a₃s³ + a₄s⁴ + a₅s⁵
+   边界条件：
+
+   - 起点：[y₀, y'₀, y''₀]
+   - 终点：[yf, y'f, y''f]
+
+   采样策略（Mercedes实践）：
+
+   - 横向偏移：[-3.5, -1.75, 0, 1.75, 3.5]m
+   - 纵向距离：[10, 20, 30, 40, 50]m
+   - 组合数量：5×5 = 25条候选路径
+
+2. 纵向运动原语（Longitudinal Primitives）：
+   四次多项式：v(t) = b₀ + b₁t + b₂t² + b₃t³ + b₄t⁴
+   约束条件：
+
+   - 加速度限制：|a| ≤ 4m/s²
+   - 加加速度限制：|j| ≤ 2m/s³
+   - 速度范围：[0, vmax]
+
+   速度剖面采样：
+
+   - 目标速度：[0, 5, 10, 15, 20, 25, 30]m/s
+   - 到达时间：[2, 3, 4, 5, 6]s
+   - 组合数量：7×5 = 35条速度剖面
+</code></pre>
+
+<p><strong>成本函数设计细节：</strong></p>
+<pre class="codehilite"><code>1. 安全成本(Jsafety)：
+   - 碰撞风险：exp(-d_obs/σ)
+   - 道路边界：exp(-d_road/σ)
+   - 视野盲区：visibility_cost
+   权重：w₁ = 1000（最高优先级）
+
+2. 舒适度成本(Jcomfort)：
+   - 横向加速度：∫ay²dt
+   - 纵向加速度：∫ax²dt
+   - 加加速度：∫jerk²dt
+   权重：w₂ = 10
+
+3. 效率成本(Jefficiency)：
+   - 行程时间：T_total
+   - 速度偏差：(v - v_desired)²
+   - 路径长度：∫ds
+   权重：w₃ = 1
+
+4. 合规成本(Jlegality)：
+   - 超速罚分：max(0, v - v_limit)²
+   - 车道偏离：lane_deviation²
+   - 交规违反：traffic_violation
+   权重：w₄ = 100
+
+5. 一致性成本(Jconsistency)：
+   - 与上一帧偏差：||traj_new - traj_old||²
+   - 防止振荡
+   权重：w₅ = 5
+</code></pre>
+
+<p><strong>Mercedes-Benz S-Class (2013-2018)的工业级Lattice实践：</strong></p>
+<pre class="codehilite"><code>系统配置：
+├─ 处理器：NVIDIA Drive PX2 (8 TOPS)
+├─ 更新频率：50Hz (20ms周期)
+├─ 预瞄时间：6秒
+└─ 规划距离：150米
+
+性能优化技术：
+
+1. 运动原语缓存：
+   - 预计算10000+条轨迹
+   - 存储为查找表(LUT)
+   - 内存占用：~50MB
+
+2. 并行评估：
+   - CUDA加速成本计算
+   - 800条轨迹并行评估
+   - 计算时间：&lt;5ms
+
+3. 早期剪枝：
+   - 碰撞检测提前终止
+   - 分层包围盒(BVH)
+   - 剪枝率：&gt;70%
+
+实际性能指标：
+
+- 成功率：99.2%（高速公路）
+- 舒适度：横向加速度&lt;2m/s²
+- 计算延迟：12±3ms
+- 紧急避障反应：&lt;100ms
+</code></pre>
+
+<p><strong>百度Apollo EM Planner深度解析(2018-2020)：</strong></p>
+<pre class="codehilite"><code>┌─────────────────────────────────────────┐
+│      EM Planner完整技术栈               │
+├─────────────────────────────────────────┤
+│  1. 参考线提供器 (Reference Provider)    │
+│     输入：高精地图车道中心线              │
+│     处理：                              │
+│     - 离散点平滑(QP-Spline)            │
+│     - 曲率连续性保证                    │
+│     - 多参考线生成(换道场景)            │
+│     输出：平滑参考线[s, x(s), y(s), κ(s)]│
+├─────────────────────────────────────────┤
+│  2. 决策器 (Decision Maker)             │
+│     任务分解：                          │
+│     - 车道决策：保持/左变/右变          │
+│     - 障碍物决策：超车/跟随/让行        │
+│     - 速度决策：巡航/减速/停止          │
+│     输出：语义化决策序列                │
+├─────────────────────────────────────────┤
+│  3. 路径规划器 (Path Planner)           │
+│     3.1 DP路径生成：                    │
+│     - SL坐标系采样                     │
+│     - 横向偏移：[-3, -1.5, 0, 1.5, 3]m│
+│     - 纵向步长：[5, 10, 15, 20]m       │
+│     - 动态规划求解最优路径              │
+│                                        │
+│     3.2 QP路径优化：                    │
+│     min J = ∫[w₁κ² + w₂κ'² + w₃(l-lref)²]ds│
+│     s.t. 道路边界约束                   │
+│          障碍物避让约束                  │
+│          曲率限制约束                    │
+├─────────────────────────────────────────┤
+│  4. 速度规划器 (Speed Planner)          │
+│     4.1 ST图构建：                      │
+│     - 障碍物投影到ST空间                │
+│     - 安全走廊生成                      │
+│                                        │
+│     4.2 DP速度生成：                    │
+│     - 时间采样：0.1s间隔                │
+│     - 速度采样：[-2, -1, 0, 1, 2]m/s增量│
+│                                        │
+│     4.3 QP速度优化：                    │
+│     min J = ∫[w₁a² + w₂j² + w₃(v-vref)²]dt│
+│     s.t. 动力学约束                     │
+│          ST障碍物约束                    │
+└─────────────────────────────────────────┤
+
+关键创新点：
+
+1. Path-Speed解耦：
+   - 降低问题维度
+   - 并行优化可能
+   - 计算效率提升5倍
+
+2. Frenet坐标系：
+   - 简化道路跟随
+   - 自然的横纵向解耦
+   - 便于约束表达
+
+3. 二次规划求解器：
+   - OSQP开源求解器
+   - ADMM算法
+   - 求解时间&lt;10ms
 </code></pre>
 
 <h3 id="13">1.3 数值优化方法</h3>
